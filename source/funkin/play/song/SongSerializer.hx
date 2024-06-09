@@ -2,6 +2,8 @@ package funkin.play.song;
 
 import funkin.data.song.SongData.SongChartData;
 import funkin.data.song.SongData.SongMetadata;
+import funkin.data.song.importer.FNFLegacyData;
+import funkin.data.song.importer.FNFLegacyImporter;
 import funkin.util.SerializerUtil;
 import funkin.util.FileUtil;
 import lime.utils.Bytes;

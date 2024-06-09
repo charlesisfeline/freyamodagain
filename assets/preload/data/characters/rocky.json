@@ -8,6 +8,9 @@
   "pixelIcon": {
     "id": "bf"
   },
+  "healthIcon": {
+    "id": "bf"
+  },
   "animations": [
     {
       "name": "idle",
