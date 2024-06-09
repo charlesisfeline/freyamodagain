@@ -3,6 +3,9 @@
   "name": "Nene",
   "assetPath": "characters/Nene",
   "startingAnimation": "danceRight",
+  "pixelIcon": {
+    "id": "gf"
+  },
   "animations": [
     {
       "name": "danceLeft",

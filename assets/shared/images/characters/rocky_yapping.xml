@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="rocky_yapping.png">
+	<!-- What is bro waffling about? :sob: -->
+	<SubTexture name="idle0000" x="178" y="356" width="178" height="178" frameX="0" frameY="0" frameWidth="178" frameHeight="178"/>
+	<SubTexture name="right0000" x="712" y="0" width="178" height="178" frameX="0" frameY="0" frameWidth="178" frameHeight="178"/>
+	<SubTexture name="right0001" x="534" y="356" width="178" height="178" frameX="0" frameY="0" frameWidth="178" frameHeight="178"/>
+	<SubTexture name="down0000" x="534" y="178" width="178" height="178" frameX="0" frameY="0" frameWidth="178" frameHeight="178"/>
+	<SubTexture name="down0001" x="534" y="0" width="178" height="178" frameX="0" frameY="0" frameWidth="178" frameHeight="178"/>
+	<SubTexture name="up0000" x="712" y="178" width="178" height="178" frameX="0" frameY="0" frameWidth="178" frameHeight="178"/>
+	<SubTexture name="up0001" x="178" y="0" width="178" height="178" frameX="0" frameY="0" frameWidth="178" frameHeight="178"/>
+	<SubTexture name="left0000" x="0" y="356" width="178" height="178" frameX="0" frameY="0" frameWidth="178" frameHeight="178"/>
+	<SubTexture name="left0001" x="356" y="356" width="178" height="178" frameX="0" frameY="0" frameWidth="178" frameHeight="178"/>
+	<SubTexture name="miss0000" x="356" y="178" width="178" height="178" frameX="0" frameY="0" frameWidth="178" frameHeight="178"/>
+	<SubTexture name="miss0001" x="0" y="0" width="178" height="178" frameX="0" frameY="0" frameWidth="178" frameHeight="178"/>
+	<SubTexture name="miss0002" x="356" y="0" width="178" height="178" frameX="0" frameY="0" frameWidth="178" frameHeight="178"/>
+	<SubTexture name="miss0003" x="0" y="178" width="178" height="178" frameX="0" frameY="0" frameWidth="178" frameHeight="178"/>
+	<SubTexture name="miss0004" x="178" y="178" width="178" height="178" frameX="0" frameY="0" frameWidth="178" frameHeight="178"/>
+</TextureAtlas>

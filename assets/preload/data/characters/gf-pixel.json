@@ -5,6 +5,9 @@
   "startingAnimation": "danceRight",
   "isPixel": true,
   "scale": 6,
+  "pixelIcon": {
+    "id": "gf"
+  },
   "animations": [
     {
       "name": "danceLeft",

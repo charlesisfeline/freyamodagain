@@ -10,6 +10,9 @@
     "id": "bf-pixel",
     "isPixel": true
   },
+  "pixelIcon": {
+    "id": "bf"
+  },
   "death": {
     "cameraOffsets": [200, 200]
   },

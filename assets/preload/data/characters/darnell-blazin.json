@@ -5,6 +5,9 @@
   "healthIcon": {
     "id": "darnell"
   },
+  "pixelIcon": {
+    "id": "darnell"
+  },
   "renderType": "animateatlas",
   "singTime": 999.0,
   "animations": [

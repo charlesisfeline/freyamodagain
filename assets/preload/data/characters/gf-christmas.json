@@ -3,6 +3,9 @@
   "name": "Girlfriend (Christmas)",
   "assetPath": "characters/gfChristmas",
   "startingAnimation": "danceLeft",
+  "pixelIcon": {
+    "id": "gf"
+  },
   "animations": [
     {
       "name": "danceLeft",

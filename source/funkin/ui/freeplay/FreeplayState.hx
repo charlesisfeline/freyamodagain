@@ -1857,6 +1857,7 @@ class FreeplayState extends MusicBeatSubState
       var instSuffix:String = previewSong?.getDifficulty(currentDifficulty,
         previewSong?.variations ?? Constants.DEFAULT_VARIATION_LIST)?.characters?.instrumental ?? '';
       instSuffix = (instSuffix != '') ? '-$instSuffix' : '';
+      final previewTiming:Array<Float> = daSongCapsule.songData.getPreviewTiming();
       FunkinSound.playMusic(daSongCapsule.songData.songId,
         {
           startingVolume: 0.0,
@@ -1867,11 +1868,11 @@ class FreeplayState extends MusicBeatSubState
           partialParams:
             {
               loadPartial: true,
-              start: 0.05,
-              end: 0.25
+              start: previewTiming[0],
+              end: previewTiming[1],
             },
           onLoad: function() {
-            FlxG.sound.music.fadeIn(2, 0, 0.4);
+            FlxG.sound.music.fadeIn(2, 0, 0.6);
           }
         });
     }
@@ -2009,6 +2010,12 @@ class FreeplaySongData
   public var scoringRank:Null<ScoringRank> = null;
 
   var displayedVariations:Array<String> = [Constants.DEFAULT_VARIATION];
+
+  public inline function getPreviewTiming():Array<Float>
+    return [
+      song._data.playData.previewStart / 100000,
+      song._data.playData.previewEnd / 100000
+    ]; // 100000 = ms -> seconds
 
   function set_currentDifficulty(value:String):String
   {

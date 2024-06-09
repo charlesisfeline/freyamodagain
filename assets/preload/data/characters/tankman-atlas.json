@@ -7,6 +7,9 @@
   "singTime": 8.0,
   "offsets": [200, -550],
   "cameraOffsets": [200, 500],
+  "pixelIcon": {
+    "id": "tankman"
+  },
   "animations": [
     {
       "name": "idle",

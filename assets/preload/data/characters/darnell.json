@@ -4,6 +4,9 @@
   "assetPath": "characters/darnell",
   "singTime": 8.0,
   "offsets": [20, 100],
+  "pixelIcon": {
+    "id": "darnell"
+  },
   "animations": [
     {
       "name": "idle",

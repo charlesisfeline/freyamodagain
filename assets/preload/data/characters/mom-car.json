@@ -6,6 +6,9 @@
   "healthIcon": {
     "id": "mom"
   },
+  "pixelIcon": {
+    "id": "mommy"
+  },
   "cameraOffsets": [0, -100],
   "animations": [
     {

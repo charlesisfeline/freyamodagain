@@ -10,6 +10,9 @@
     "cameraOffsets": [10, -40],
     "cameraZoom": 1.0
   },
+  "pixelIcon": {
+    "id": "pico"
+  },
   "flipX": true,
   "renderType": "multisparrow",
   "animations": [

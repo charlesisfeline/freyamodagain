@@ -4,6 +4,9 @@
   "assetPath": "characters/GF_assets",
   "startingAnimation": "danceRight",
   "singTime": 8.0,
+  "pixelIcon": {
+    "id": "gf"
+  },
   "animations": [
     {
       "name": "danceLeft",
