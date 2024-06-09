@@ -965,12 +965,17 @@ class FreeplayState extends MusicBeatSubState
     grpCapsules.members[curSelected].ranking.scale.set(20, 20);
     grpCapsules.members[curSelected].blurredRanking.scale.set(20, 20);
 
-    grpCapsules.members[curSelected].ranking.animation.play(fromResults.newRank.getFreeplayRankIconAsset(), true);
-    // grpCapsules.members[curSelected].ranking.animation.curAnim.name, true);
+    if (fromResults?.newRank != null)
+    {
+      grpCapsules.members[curSelected].ranking.animation.play(fromResults.newRank.getFreeplayRankIconAsset(), true);
+    }
 
     FlxTween.tween(grpCapsules.members[curSelected].ranking, {"scale.x": 1, "scale.y": 1}, 0.1);
 
-    grpCapsules.members[curSelected].blurredRanking.animation.play(fromResults.newRank.getFreeplayRankIconAsset(), true);
+    if (fromResults?.newRank != null)
+    {
+      grpCapsules.members[curSelected].blurredRanking.animation.play(fromResults.newRank.getFreeplayRankIconAsset(), true);
+    }
     FlxTween.tween(grpCapsules.members[curSelected].blurredRanking, {"scale.x": 1, "scale.y": 1}, 0.1);
 
     new FlxTimer().start(0.1, _ -> {
@@ -1033,10 +1038,10 @@ class FreeplayState extends MusicBeatSubState
 
   function rankAnimSlam(fromResultsParams:Null<FromResultsParams>)
   {
-    // FlxTween.tween(rankCamera, {"zoom": 1.9}, 0.5, {ease: FlxEase.backOut});
+    FlxTween.tween(rankCamera, {"zoom": 1.9}, 0.5, {ease: FlxEase.backOut});
     FlxTween.tween(rankBg, {alpha: 0}, 0.5, {ease: FlxEase.expoIn});
 
-    // FlxTween.tween(grpCapsules.members[curSelected], {angle: 5}, 0.5, {ease: FlxEase.backIn});
+    FlxTween.tween(grpCapsules.members[curSelected], {angle: 5}, 0.5, {ease: FlxEase.backIn});
 
     switch (fromResultsParams?.newRank)
     {
@@ -1192,51 +1197,9 @@ class FreeplayState extends MusicBeatSubState
     // {
     //   rankAnimSlam(fromResultsParams);
     // }
-
-    if (FlxG.keys.justPressed.G)
-    {
-      sparks.y -= 2;
-      trace(sparks.x, sparks.y);
-    }
-    if (FlxG.keys.justPressed.V)
-    {
-      sparks.x -= 2;
-      trace(sparks.x, sparks.y);
-    }
-    if (FlxG.keys.justPressed.N)
-    {
-      sparks.x += 2;
-      trace(sparks.x, sparks.y);
-    }
-    if (FlxG.keys.justPressed.B)
-    {
-      sparks.y += 2;
-      trace(sparks.x, sparks.y);
-    }
-
-    if (FlxG.keys.justPressed.I)
-    {
-      sparksADD.y -= 2;
-      trace(sparksADD.x, sparksADD.y);
-    }
-    if (FlxG.keys.justPressed.J)
-    {
-      sparksADD.x -= 2;
-      trace(sparksADD.x, sparksADD.y);
-    }
-    if (FlxG.keys.justPressed.L)
-    {
-      sparksADD.x += 2;
-      trace(sparksADD.x, sparksADD.y);
-    }
-    if (FlxG.keys.justPressed.K)
-    {
-      sparksADD.y += 2;
-      trace(sparksADD.x, sparksADD.y);
-    }
     #end
 
-    if (FlxG.keys.justPressed.F && !busy)
+    if (controls.FREEPLAY_FAVORITE && !busy)
     {
       var targetSong = grpCapsules.members[curSelected]?.songData;
       if (targetSong != null)
@@ -1494,7 +1457,7 @@ class FreeplayState extends MusicBeatSubState
 
       var longestTimer:Float = 0;
 
-      // FlxTween.color(bgDad, 0.33, 0xFFFFFFFF, 0xFF555555, {ease: FlxEase.quadOut});
+      FlxTween.color(bgDad, 0.33, 0xFFFFFFFF, 0xFF555555, {ease: FlxEase.quadOut});
       FlxTween.color(pinkBack, 0.25, 0xFFFFD863, 0xFFFFD0D5, {ease: FlxEase.quadOut});
 
       cardGlow.visible = true;
@@ -1749,7 +1712,7 @@ class FreeplayState extends MusicBeatSubState
     grpCapsules.members[curSelected].forcePosition();
     grpCapsules.members[curSelected].songText.flickerText();
 
-    // FlxTween.color(bgDad, 0.33, 0xFFFFFFFF, 0xFF555555, {ease: FlxEase.quadOut});
+    FlxTween.color(bgDad, 0.33, 0xFFFFFFFF, 0xFF555555, {ease: FlxEase.quadOut});
     FlxTween.color(pinkBack, 0.33, 0xFFFFD0D5, 0xFF171831, {ease: FlxEase.quadOut});
     orangeBackShit.visible = false;
     alsoOrangeLOL.visible = false;
@@ -1890,14 +1853,17 @@ class FreeplayState extends MusicBeatSubState
     }
     else
     {
-      var potentiallyErect:String = (currentDifficulty == "erect") || (currentDifficulty == "nightmare") ? "-erect" : "";
+      var previewSong:Null<Song> = SongRegistry.instance.fetchEntry(daSongCapsule.songData.songId);
+      var instSuffix:String = previewSong?.getDifficulty(currentDifficulty,
+        previewSong?.variations ?? Constants.DEFAULT_VARIATION_LIST)?.characters?.instrumental ?? '';
+      instSuffix = (instSuffix != '') ? '-$instSuffix' : '';
       FunkinSound.playMusic(daSongCapsule.songData.songId,
         {
           startingVolume: 0.0,
           overrideExisting: true,
           restartTrack: false,
           pathsFunction: INST,
-          suffix: potentiallyErect,
+          suffix: instSuffix,
           partialParams:
             {
               loadPartial: true,
