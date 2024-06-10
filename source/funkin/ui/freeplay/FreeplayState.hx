@@ -1791,11 +1791,11 @@ class FreeplayState extends MusicBeatSubState
 
   function changeSelection(change:Int = 0):Void
   {
-    if (!prepForNewRank) FunkinSound.playOnce(Paths.sound('scrollMenu'), 0.4);
-
     var prevSelected:Int = curSelected;
 
     curSelected += change;
+
+    if (!prepForNewRank && curSelected != prevSelected) FunkinSound.playOnce(Paths.sound('scrollMenu'), 0.4);
 
     if (curSelected < 0) curSelected = grpCapsules.countLiving() - 1;
     if (curSelected >= grpCapsules.countLiving()) curSelected = 0;
@@ -1841,6 +1841,9 @@ class FreeplayState extends MusicBeatSubState
 
   public function playCurSongPreview(daSongCapsule:SongMenuItem):Void
   {
+    var volume:Float = 0.4;
+    if (dj.playingCartoon) volume *= 0.4; // 40%
+
     if (curSelected == 0)
     {
       FunkinSound.playMusic('freeplayRandom',
@@ -1849,7 +1852,7 @@ class FreeplayState extends MusicBeatSubState
           overrideExisting: true,
           restartTrack: false
         });
-      FlxG.sound.music.fadeIn(2, 0, 0.8);
+      FlxG.sound.music.fadeIn(2, 0, volume);
     }
     else
     {
@@ -1872,7 +1875,7 @@ class FreeplayState extends MusicBeatSubState
               end: previewTiming[1],
             },
           onLoad: function() {
-            FlxG.sound.music.fadeIn(2, 0, 0.6);
+            FlxG.sound.music.fadeIn(2, 0, volume);
           }
         });
     }
