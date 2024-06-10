@@ -431,7 +431,7 @@ class PauseSubState extends MusicBeatSubState
       resume(this);
     }
 
-    #if (debug || FORCE_DEBUG_VERSION)
+    #if (debug || FORCE_DEBUG_VERSION || DEBUG_SHITS)
     // to pause the game and get screenshots easy, press H on pause menu!
     if (FlxG.keys.justPressed.H)
     {

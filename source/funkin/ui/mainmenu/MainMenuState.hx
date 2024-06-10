@@ -346,7 +346,7 @@ class MainMenuState extends MusicBeatState
     }
     #end
 
-    #if (debug || FORCE_DEBUG_VERSION)
+    #if (debug || FORCE_DEBUG_VERSION || DEBUG_SHITS)
     if (FlxG.keys.pressed.CONTROL && FlxG.keys.pressed.ALT && FlxG.keys.pressed.SHIFT && FlxG.keys.justPressed.W)
     {
       // Give the user a score of 1 point on Weekend 1 story mode.
