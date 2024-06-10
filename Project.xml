@@ -113,6 +113,7 @@ xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/
 	<define name="TOUCH_HERE_TO_PLAY" if="web || mobile" />
 
 	<!-- _______________________________ Libraries ______________________________ -->
+
 	<haxelib name="lime" /> <!-- Game engine backend -->
 	<haxelib name="openfl" /> <!-- Game engine backend -->
 	<haxelib name="flixel" /> <!-- Game engine -->
@@ -150,10 +151,13 @@ xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/
 		<haxeflag name="-w" value="-WDeprecated" />
 	-->
 
+	<haxedef name="DEBUG_SHITS" />
+
 	<!-- Haxe 4.3.0+: Enable pretty syntax errors and stuff. -->
 	<haxedef name="message.reporting" value="pretty" />
 
 	<!-- _________________________________ Custom _______________________________ -->
+
 	<!-- Disable trace() calls in release builds to bump up performance. -->
 	<haxeflag name="--no-traces" unless="debug" />
 

@@ -252,7 +252,7 @@ class FreeplayState extends MusicBeatSubState
 
     var isDebug:Bool = false;
 
-    #if debug
+    #if (debug || DEBUG_SHITS)
     isDebug = true;
     #end
 
@@ -1182,7 +1182,7 @@ class FreeplayState extends MusicBeatSubState
   {
     super.update(elapsed);
 
-    #if debug
+    #if (debug || DEBUG_SHITS)
     if (FlxG.keys.justPressed.T)
     {
       rankAnimStart(fromResultsParams);
@@ -1758,7 +1758,7 @@ class FreeplayState extends MusicBeatSubState
           practiceMode: false,
           minimalMode: false,
 
-          #if (debug || FORCE_DEBUG_VERSION)
+          #if (debug || FORCE_DEBUG_VERSION || DEBUG_SHITS)
           botPlayMode: FlxG.keys.pressed.SHIFT,
           #else
           botPlayMode: false,

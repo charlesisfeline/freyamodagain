@@ -832,9 +832,9 @@ class PlayState extends MusicBeatSubState
     rightWatermarkText.cameras = [camHUD];
 
     // Initialize some debug stuff.
-    #if (debug || FORCE_DEBUG_VERSION)
+    #if (debug || FORCE_DEBUG_VERSION || DEBUG_SHITS)
     // Display the version number (and git commit hash) in the bottom right corner.
-    this.rightWatermarkText.text = Constants.VERSION;
+    this.rightWatermarkText.text = "FNF " + Constants.VERSION;
 
     FlxG.console.registerObject('playState', this);
     #end
@@ -1150,7 +1150,7 @@ class PlayState extends MusicBeatSubState
 
         // Disable updates, preventing animations in the background from playing.
         persistentUpdate = false;
-        #if (debug || FORCE_DEBUG_VERSION)
+        #if (debug || FORCE_DEBUG_VERSION || DEBUG_SHITS)
         if (FlxG.keys.pressed.THREE)
         {
           // TODO: Change the key or delete this?
@@ -1161,7 +1161,7 @@ class PlayState extends MusicBeatSubState
         {
         #end
           persistentDraw = false;
-        #if (debug || FORCE_DEBUG_VERSION)
+        #if (debug || FORCE_DEBUG_VERSION || DEBUG_SHITS)
         }
         #end
 
@@ -2152,7 +2152,7 @@ class PlayState extends MusicBeatSubState
     vocals.pause();
 
     FlxG.sound.music.time = Conductor.instance.songPosition;
-    // FlxG.sound.music.play(Conductor.instance.songPosition);
+    FlxG.sound.music.play(Conductor.instance.songPosition);
 
     vocals.time = Conductor.instance.songPosition;
     vocals.play(true, Conductor.instance.songPosition);
@@ -2749,7 +2749,7 @@ class PlayState extends MusicBeatSubState
     }
     #end
 
-    #if (debug || FORCE_DEBUG_VERSION)
+    #if (debug || FORCE_DEBUG_VERSION || DEBUG_SHITS)
     // 1: End the song immediately.
     if (FlxG.keys.justPressed.ONE) endSong(true);
 
@@ -2763,7 +2763,7 @@ class PlayState extends MusicBeatSubState
     // 9: Toggle the old icon.
     if (FlxG.keys.justPressed.NINE) iconP1.toggleOldIcon();
 
-    #if (debug || FORCE_DEBUG_VERSION)
+    #if (debug || FORCE_DEBUG_VERSION || DEBUG_SHITS)
     // PAGEUP: Skip forward two sections.
     // SHIFT+PAGEUP: Skip forward twenty sections.
     if (FlxG.keys.justPressed.PAGEUP) changeSection(FlxG.keys.pressed.SHIFT ? 20 : 2);
@@ -3529,7 +3529,7 @@ class PlayState extends MusicBeatSubState
     scrollSpeedTweens = [];
   }
 
-  #if (debug || FORCE_DEBUG_VERSION)
+  #if (debug || FORCE_DEBUG_VERSION || DEBUG_SHITS)
   /**
    * Jumps forward or backward a number of sections in the song.
    * Accounts for BPM changes, does not prevent death from skipped notes.
