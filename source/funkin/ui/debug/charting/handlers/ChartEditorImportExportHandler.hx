@@ -26,34 +26,53 @@ class ChartEditorImportExportHandler
   /**
    * Fetch's a song's existing chart and audio and loads it, replacing the current song.
    */
-  public static function loadSongAsTemplate(state:ChartEditorState, songId:String):Void
+  public static function loadSongAsTemplate(state:ChartEditorState, songId:String, ?startingVariation:String, ?startingDifficulty:String):Void
   {
     trace('===============START');
 
     var song:Null<Song> = SongRegistry.instance.fetchEntry(songId);
-
     if (song == null) return;
-
     // Load the song metadata.
     var rawSongMetadata:Array<SongMetadata> = song.getRawMetadata();
     var songMetadata:Map<String, SongMetadata> = [];
     var songChartData:Map<String, SongChartData> = [];
-
     for (metadata in rawSongMetadata)
     {
       if (metadata == null) continue;
       var variation = (metadata.variation == null || metadata.variation == '') ? Constants.DEFAULT_VARIATION : metadata.variation;
-
       // Clone to prevent modifying the original.
       var metadataClone:SongMetadata = metadata.clone();
       metadataClone.variation = variation;
       if (metadataClone != null) songMetadata.set(variation, metadataClone);
-
       var chartData:Null<SongChartData> = SongRegistry.instance.parseEntryChartData(songId, metadata.variation);
       if (chartData != null) songChartData.set(variation, chartData);
     }
 
-    loadSong(state, songMetadata, songChartData);
+    if (startingVariation == null)
+    {
+      if (state.availableVariations.contains(Constants.DEFAULT_VARIATION))
+      {
+        startingVariation = Constants.DEFAULT_VARIATION;
+      }
+      else
+      {
+        startingVariation = state.availableVariations[0];
+      }
+    }
+
+    if (startingDifficulty == null)
+    {
+      if (state.availableDifficulties.contains(Constants.DEFAULT_DIFFICULTY))
+      {
+        startingDifficulty = Constants.DEFAULT_DIFFICULTY;
+      }
+      else
+      {
+        startingDifficulty = state.availableDifficulties[0];
+      }
+    }
+
+    loadSong(state, songMetadata, songChartData, startingVariation, startingDifficulty);
 
     state.sortChartData();
 
@@ -105,6 +124,10 @@ class ChartEditorImportExportHandler
 
     state.refreshToolbox(ChartEditorState.CHART_EDITOR_TOOLBOX_METADATA_LAYOUT);
 
+    // Apply the BPM because it wasn't getting applied for some reason
+    var startingBPM = state.currentSongMetadata.timeChanges[0].bpm;
+    trace('Starting BPM: $startingBPM');
+
     state.success('Success', 'Loaded song (${rawSongMetadata[0].songName})');
 
     trace('===============END');
@@ -114,19 +137,71 @@ class ChartEditorImportExportHandler
    * Loads a chart from parsed song metadata and chart data into the editor.
    * @param newSongMetadata The song metadata to load.
    * @param newSongChartData The song chart data to load.
+   * @param startingVariation The variation to load, defaults to `default` or the first variation.
+   * @param startingDifficulty The difficulty to load, defaults to `normal` or the first difficulty in the variation.
    */
-  public static function loadSong(state:ChartEditorState, newSongMetadata:Map<String, SongMetadata>, newSongChartData:Map<String, SongChartData>):Void
+  public static function loadSong(state:ChartEditorState, newSongMetadata:Map<String, SongMetadata>, newSongChartData:Map<String, SongChartData>,
+      ?startingVariation:String, ?startingDifficulty:String):Void
   {
     state.songMetadata = newSongMetadata;
     state.songChartData = newSongChartData;
 
-    Conductor.instance.forceBPM(null); // Disable the forced BPM.
-    Conductor.instance.instrumentalOffset = state.currentInstrumentalOffset; // Loads from the metadata.
-    Conductor.instance.mapTimeChanges(state.currentSongMetadata.timeChanges);
-    state.updateTimeSignature();
+    if (startingVariation == null || !state.availableVariations.contains(startingVariation))
+    {
+      if (state.availableVariations.contains(Constants.DEFAULT_VARIATION))
+      {
+        startingVariation = Constants.DEFAULT_VARIATION;
+      }
+      else
+      {
+        startingVariation = state.availableVariations[0];
+      }
+    }
 
-    state.notePreviewDirty = true;
-    state.notePreviewViewportBoundsDirty = true;
+    var mustForceBPM:Bool = false;
+
+    if (startingVariation != state.selectedVariation)
+    {
+      state.selectedVariation = startingVariation;
+    }
+    else
+    {
+      mustForceBPM = true;
+    }
+
+    if (startingDifficulty != null && state.availableDifficulties.contains(startingDifficulty))
+    {
+      state.selectedDifficulty = startingDifficulty;
+    }
+    else
+    {
+      if (state.availableDifficulties.contains(Constants.DEFAULT_DIFFICULTY))
+      {
+        state.selectedDifficulty = Constants.DEFAULT_DIFFICULTY;
+      }
+      else
+      {
+        state.selectedDifficulty = state.availableDifficulties[0];
+      }
+    }
+
+    // This work already gets done if startingVariation gets overridden.
+    // We have this check so it always happens but doesn't happen twice.
+    if (mustForceBPM)
+    {
+      // Force reset BPM and time signature.
+      Conductor.instance.forceBPM(null); // Disable the forced BPM.
+      Conductor.instance.instrumentalOffset = state.currentInstrumentalOffset; // Loads from the metadata.
+      // We map the time changes AFTER setting the variation so
+      Conductor.instance.mapTimeChanges(state.currentSongMetadata.timeChanges);
+      state.updateTimeSignature();
+
+      // Make sure view is updated when the variation changes.
+      state.noteDisplayDirty = true;
+      state.notePreviewDirty = true;
+      state.noteTooltipsDirty = true;
+      state.notePreviewViewportBoundsDirty = true;
+    }
     state.difficultySelectDirty = true;
     state.opponentPreviewDirty = true;
     state.playerPreviewDirty = true;
@@ -168,10 +243,11 @@ class ChartEditorImportExportHandler
    * Load a chart's metadata, chart data, and audio from an FNFC archive.
    * @param state
    * @param bytes
-   * @param instId
+   * @param startingVariation
+   * @param startingDifficulty
    * @return `null` on failure, `[]` on success, `[warnings]` on success with warnings.
    */
-  public static function loadFromFNFC(state:ChartEditorState, bytes:Bytes):Null<Array<String>>
+  public static function loadFromFNFC(state:ChartEditorState, bytes:Bytes, ?startingVariation:String, ?startingDifficulty:String):Null<Array<String>>
   {
     var warnings:Array<String> = [];
 
@@ -309,7 +385,31 @@ class ChartEditorImportExportHandler
     // Apply chart data.
     trace(songMetadatas);
     trace(songChartDatas);
-    loadSong(state, songMetadatas, songChartDatas);
+    if (startingVariation == null)
+    {
+      if (state.availableVariations.contains(Constants.DEFAULT_VARIATION))
+      {
+        startingVariation = Constants.DEFAULT_VARIATION;
+      }
+      else
+      {
+        startingVariation = state.availableVariations[0];
+      }
+    }
+
+    if (startingDifficulty == null)
+    {
+      if (state.availableDifficulties.contains(Constants.DEFAULT_DIFFICULTY))
+      {
+        startingDifficulty = Constants.DEFAULT_DIFFICULTY;
+      }
+      else
+      {
+        startingDifficulty = state.availableDifficulties[0];
+      }
+    }
+
+    loadSong(state, songMetadatas, songChartDatas, startingVariation, startingDifficulty);
 
     state.switchToCurrentInstrumental();
 
