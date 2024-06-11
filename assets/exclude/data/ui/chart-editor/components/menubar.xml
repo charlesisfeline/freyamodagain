@@ -14,6 +14,7 @@
     <menu-separator />
     <menu-item id="menubarItemSaveChart" text="Save Chart" shortcutText="Ctrl+S" />
     <menu-item id="menubarItemSaveChartAs" text="Save Chart As..." shortcutText="Ctrl+Shift+S" />
+    <menu-item id="menubarItemSaveChartAsLegacy" text="Save Chart As Legacy" disabled="true" />
     <menu-separator />
     <menu-item id="menubarItemPreferences" text="Preferences" disabled="true" />
     <menu-separator />
@@ -54,6 +55,11 @@
     <menu text="Theme">
       <menu-option-box id="menuBarItemThemeLight" text="Light" group="menubarItemThemeGroup" selected="true" />
       <menu-option-box id="menuBarItemThemeDark" text="Dark" group="menubarItemThemeGroup" />
+      <menu-option-box id="menuBarItemThemeFreya" text="Freya" group="menubarItemThemeGroup" disabled="true" />
+      <menu-option-box id="menuBarItemThemeScratch" text="Scratch" group="menubarItemThemeGroup" disabled="true" />
+      <menu-option-box id="menuBarItemThemeOffice" text="Office 2007" group="menubarItemThemeGroup" disabled="true" />
+      <menu-option-box id="menuBarItemThemeAdobe" text="Adobe" group="menubarItemThemeGroup" disabled="true" />
+      <menu-option-box id="menuBarItemThemeCustom" text="Custom" group="menubarItemThemeGroup" disabled="true" />
     </menu>
     <menu-separator />
     <menu-item id="menubarItemDifficultyUp" text="Increase Difficulty" tooltip="Manage Difficulties with the Difficulty Toolbox" shortcutText="Ctrl+Left" />
@@ -131,5 +137,5 @@
     <menu-item id="menubarItemAbout" text="About..." />
   </menu>
   <spacer width="100%" />
-  <label text="PROTOTYPE Functionality is subject to change." verticalAlign="center" />
+  <label text="[PROTOTYPE] Functionality is subject to change." verticalAlign="center" />
 </menubar>
