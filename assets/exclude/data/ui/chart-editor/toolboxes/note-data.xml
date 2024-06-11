@@ -7,9 +7,17 @@
 				<data>
 					<item id="" text="Default" />
 					<item id="~CUSTOM~" text="Custom" />
+					<item id="noAnimation" text="No Animation" />
+					<item id="gfNote" text="GF Sings" />
+					<item id="heyNote" text="Hey!" />
+					<item id="hurtNote" text="Hurt Note" />
+					<item id="bulletNote" text="Bullet Note" />
+					<item id="healNote" text="Heal Note" />
+					<item id="breadNote" text="Bread Note" />
+					<item id="knifeNote" text="Knife Note" />
 				</data>
 			</dropdown>
-			<label id="toolboxNotesCustomKindLabel" text="Custom Note Type" hidden="true" />
+			<label id="toolboxNotesCustomKindLabel" text="Custom Note Kind" hidden="true" />
 			<textfield id="toolboxNotesCustomKind" style="font-size: 10px" placeholder="Kind..." width="100%" hidden="true" />
 		</grid>
 	</vbox>

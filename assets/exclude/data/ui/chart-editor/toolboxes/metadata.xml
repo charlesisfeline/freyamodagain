@@ -5,7 +5,7 @@
             <vbox width="100%" height="100%">
                 <grid columns="2" height="100%">
                     <label text="Song Name:" verticalAlign="center" horizontalAlign="right" />
-                    <textfield id="inputSongName" value="Bopeebo" tooltip="The readable name of the song." />
+                    <textfield id="inputSongName" value="Freyin" tooltip="The readable name of the song." />
                     <label text="Song Artist:" verticalAlign="center" horizontalAlign="right" />
                     <textfield id="inputSongArtist" value="Kawai Sprite" tooltip="The artist who composed the song." />
                     <label text="Charter:" verticalAlign="center" horizontalAlign="right" />
@@ -24,6 +24,9 @@
                             <item text="Tankman Battlefield" />
                             <item text="Philly Streets" />
                             <item text="Philly Streets (Blazin')" />
+                            <item text="The Void" />
+                            <item text="The Void (Uzil)" />
+                            <item text="The Void (Shadows)" />
                         </data>
                     </dropdown>
                     <label text="Note Style:" verticalAlign="center" horizontalAlign="right" />
@@ -31,6 +34,7 @@
                         <data>
                             <item text="Normal" />
                             <item text="Pixel" />
+                            <item text="Kitsune" />
                         </data>
                     </dropdown>
                 </grid>
@@ -50,7 +54,7 @@
         <frame text="Difficulty: Normal" width="100%" height="170" id="frameDifficulty">
             <grid columns="2">
                 <label text="Starting BPM" verticalAlign="center" />
-                <number-stepper id="inputBPM" pos="100" step="1" min="10" max="500" precision="1" horizontalAlign="right" tooltip="Adjust the BPM of the song, which helps align the grid and character animations to the music." />
+                <number-stepper id="inputBPM" pos="100" step="1" min="5" max="999" precision="1" horizontalAlign="right" tooltip="Adjust the BPM of the song, which helps align the grid and character animations to the music." />
                 <label text="Starting Time Signature" verticalAlign="center" />
                 <dropdown id="inputTimeSignature" value="4/4" horizontalAlign="right" tooltip="Adjust the time signature of the song, which helps align the grid.">
                     <data>
