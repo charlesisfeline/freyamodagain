@@ -2891,7 +2891,7 @@ class PlayState extends MusicBeatSubState
       // If daRating is 'miss', that means we made a mistake and should not continue.
       FlxG.log.warn('popUpScore judged a note as a miss!');
       // TODO: Remove this.
-      // comboPopUps.displayRating('miss');
+      comboPopUps.displayRating('miss');
       return;
     }
     if (combo == null) combo = Highscore.tallies.combo;
