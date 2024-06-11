@@ -2,7 +2,14 @@
   "version": "1.0.0",
   "name": "Mommy Mearest",
   "assetPath": "characters/Mom_Assets",
-  "singTime": 2.0,
+  "singTime": 8.0,
+  "healthIcon": {
+    "id": "mom"
+  },
+  "pixelIcon": {
+    "id": "mommy"
+  },
+  "cameraOffsets": [0, -100],
   "animations": [
     {
       "name": "idle",
