@@ -11,7 +11,7 @@ import sys.FileSystem;
 import openfl.utils.Assets;
 #end
 import flixel.util.FlxSave;
-import sys.io.Process;
+#if desktop import sys.io.Process; #end
 #if cpp
 import cpp.vm.Gc;
 #elseif hl
@@ -77,6 +77,7 @@ class FreyaUtils
   inline public static function GCD(a, b)
     return b == 0 ? FlxMath.absInt(a) : GCD(b, a % b);
 
+  #if desktop
   public static var programList:Array<String> = [
     'obs',
     'bdcam',
@@ -112,6 +113,10 @@ class FreyaUtils
     }
     return isOBS;
   }
+  #else
+  public static function isRecording():Bool
+    return false;
+  #end
 }
 
 class FreyaMemory
