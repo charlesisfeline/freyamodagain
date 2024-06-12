@@ -450,14 +450,15 @@ class PauseSubState extends MusicBeatSubState
    */
   function changeSelection(change:Int = 0):Void
   {
-    var prevEntry:Int = currentEntry;
+    // var prevEntry:Int = currentEntry;
 
     currentEntry += change;
 
     if (currentEntry < 0) currentEntry = currentMenuEntries.length - 1;
     if (currentEntry >= currentMenuEntries.length) currentEntry = 0;
 
-    if (currentEntry != prevEntry) FunkinSound.playOnce(Paths.sound('scrollMenu'), 0.4);
+    // if (currentEntry != prevEntry) FunkinSound.playOnce(Paths.sound('scrollMenu'), 0.4);
+    if (change != 0) FunkinSound.playOnce(Paths.sound('scrollMenu'), 0.4);
 
     for (entryIndex in 0...currentMenuEntries.length)
     {

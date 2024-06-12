@@ -456,14 +456,19 @@ class FreeplayState extends MusicBeatSubState
 
     add(dj);
 
-    bgDad = new FlxSprite(pinkBack.width * 0.75, 0).loadGraphic(Paths.image('freeplay/freeplayBGdad'));
-    bgDad.setGraphicSize(0, FlxG.height);
-    bgDad.updateHitbox();
+    bgDad = new FlxSprite(pinkBack.width * 0.74, 0).loadGraphic(Paths.image('freeplay/freeplayBGdad'));
     bgDad.shader = new AngleMask();
     bgDad.visible = false;
 
     var blackOverlayBullshitLOLXD:FlxSprite = new FlxSprite(FlxG.width).makeGraphic(Std.int(bgDad.width), Std.int(bgDad.height), FlxColor.BLACK);
     add(blackOverlayBullshitLOLXD); // used to mask the text lol!
+
+    // this makes the texture sizes consistent, for the angle shader
+    bgDad.setGraphicSize(0, FlxG.height);
+    blackOverlayBullshitLOLXD.setGraphicSize(0, FlxG.height);
+
+    bgDad.updateHitbox();
+    blackOverlayBullshitLOLXD.updateHitbox();
 
     exitMovers.set([blackOverlayBullshitLOLXD, bgDad],
       {
@@ -473,7 +478,7 @@ class FreeplayState extends MusicBeatSubState
       });
 
     add(bgDad);
-    FlxTween.tween(blackOverlayBullshitLOLXD, {x: pinkBack.width * 0.76}, 0.7, {ease: FlxEase.quintOut});
+    FlxTween.tween(blackOverlayBullshitLOLXD, {x: pinkBack.width * 0.74}, 0.7, {ease: FlxEase.quintOut});
 
     blackOverlayBullshitLOLXD.shader = bgDad.shader;
 
@@ -590,6 +595,8 @@ class FreeplayState extends MusicBeatSubState
           generateSongList({filterType: FAVORITE}, true);
         case 'ALL':
           generateSongList(null, true);
+        case '#':
+          generateSongList({filterType: REGEXP, filterData: '0-9'}, true);
         default:
           generateSongList({filterType: REGEXP, filterData: str}, true);
       }
@@ -598,6 +605,7 @@ class FreeplayState extends MusicBeatSubState
       // that is, only if there's more than one song in the group!
       if (grpCapsules.members.length > 0)
       {
+        FunkinSound.playOnce(Paths.sound('scrollMenu'), 0.4);
         curSelected = 1;
         changeSelection();
       }
@@ -1585,7 +1593,19 @@ class FreeplayState extends MusicBeatSubState
     var daSong:Null<FreeplaySongData> = grpCapsules.members[curSelected].songData;
     if (daSong != null)
     {
-      var songScore:SaveScoreData = Save.instance.getSongScore(grpCapsules.members[curSelected].songData.songId, currentDifficulty);
+      // TODO: Make this actually be the variation you're focused on. We don't need to fetch the song metadata just to calculate it.
+      var targetSong:Song = SongRegistry.instance.fetchEntry(grpCapsules.members[curSelected].songData.songId);
+      if (targetSong == null)
+      {
+        FlxG.log.warn('WARN: could not find song with id (${grpCapsules.members[curSelected].songData.songId})');
+        return;
+      }
+      var targetVariation:String = targetSong.getFirstValidVariation(currentDifficulty);
+
+      // TODO: This line of code makes me sad, but you can't really fix it without a breaking migration.
+      var suffixedDifficulty = (targetVariation != Constants.DEFAULT_VARIATION
+        && targetVariation != 'erect') ? '$currentDifficulty-${targetVariation}' : currentDifficulty;
+      var songScore:SaveScoreData = Save.instance.getSongScore(grpCapsules.members[curSelected].songData.songId, suffixedDifficulty);
       intendedScore = songScore?.score ?? 0;
       intendedCompletion = songScore == null ? 0.0 : ((songScore.tallies.sick + songScore.tallies.good) / songScore.tallies.totalNotes);
       rememberedDifficulty = currentDifficulty;
@@ -1720,10 +1740,19 @@ class FreeplayState extends MusicBeatSubState
       FlxG.log.warn('WARN: could not find song with id (${cap.songData.songId})');
       return;
     }
-    var targetDifficulty:String = currentDifficulty;
-    var targetVariation:String = targetSong.getFirstValidVariation(targetDifficulty);
-
+    var targetDifficultyId:String = currentDifficulty;
+    var targetVariation:String = targetSong.getFirstValidVariation(targetDifficultyId);
     PlayStatePlaylist.campaignId = cap.songData.levelId;
+
+    var targetDifficulty:SongDifficulty = targetSong.getDifficulty(targetDifficultyId, targetVariation);
+    if (targetDifficulty == null)
+    {
+      FlxG.log.warn('WARN: could not find difficulty with id (${targetDifficultyId})');
+      return;
+    }
+
+    // TODO: Change this with alternate instrumentals
+    var targetInstId:String = targetDifficulty.characters.instrumental;
 
     // Visual and audio effects.
     FunkinSound.playOnce(Paths.sound('confirmMenu'));
@@ -1773,8 +1802,9 @@ class FreeplayState extends MusicBeatSubState
       LoadingState.loadPlayState(
         {
           targetSong: targetSong,
-          targetDifficulty: targetDifficulty,
+          targetDifficulty: targetDifficultyId,
           targetVariation: targetVariation,
+          targetInstrumental: targetInstId,
           practiceMode: false,
           minimalMode: false,
 
@@ -2085,7 +2115,7 @@ class FreeplaySongData
     this.songDifficulties = song.listDifficulties(null, variations, false, false);
     if (!this.songDifficulties.contains(currentDifficulty)) currentDifficulty = Constants.DEFAULT_DIFFICULTY;
 
-    var songDifficulty:SongDifficulty = song.getDifficulty(currentDifficulty, variations);
+    var songDifficulty:SongDifficulty = song.getDifficulty(currentDifficulty, null, variations);
     if (songDifficulty == null) return;
     this.songStartingBpm = songDifficulty.getStartingBPM();
     this.songName = songDifficulty.songName;

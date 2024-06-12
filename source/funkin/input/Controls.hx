@@ -1071,12 +1071,12 @@ class Controls extends FlxActionSet
    * An EMPTY array means the control is uninitialized and needs to be reset to default.
    * An array with a single FlxKey.NONE means the control was intentionally unbound by the user.
    */
-  public function fromSaveData(data:Dynamic, device:Device)
+  public function fromSaveData(data:Dynamic, device:Device):Void
   {
     for (control in Control.createAll())
     {
       var inputs:Array<Int> = Reflect.field(data, control.getName());
-      inputs = inputs.distinct();
+      inputs = inputs?.distinct();
       if (inputs != null)
       {
         if (inputs.length == 0)

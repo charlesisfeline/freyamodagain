@@ -370,6 +370,12 @@ class BaseCharacter extends Bopper
     // and Darnell (this keeps the flame on his lighter flickering).
     // Works for idle, singLEFT/RIGHT/UP/DOWN, alt singing animations, and anything else really.
 
+    if (!getCurrentAnimation().endsWith('-loop')
+      && hasAnimation(getCurrentAnimation() + '-loop')
+      && isAnimationFinished()) // bw compat for psych chars in case youre porting shits
+    {
+      playAnimation(getCurrentAnimation() + '-loop');
+    }
     if (!getCurrentAnimation().endsWith('-hold') && hasAnimation(getCurrentAnimation() + '-hold') && isAnimationFinished())
     {
       playAnimation(getCurrentAnimation() + '-hold');
