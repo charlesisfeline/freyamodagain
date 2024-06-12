@@ -4,7 +4,7 @@ xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/
 
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Friday Night Funkin': Vs. Freya Crew" file="FNFFreya" packageName="com.funkin.fnf" package="com.funkin.fnf" main="Main" version="0.4.0" company="ninjamuffin99" />
+	<app title="Friday Night Funkin': Vs. Freya Crew" file="FNFFreya" packageName="com.funkin.fnf" package="com.funkin.fnf" main="Main" version="0.4.1" company="ninjamuffin99" />
 	<app preloader="funkin.ui.transition.preload.FunkinPreloader" />
 	<set name="SWF_VERSION" value="11.8" />
 

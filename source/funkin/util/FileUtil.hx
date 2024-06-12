@@ -22,13 +22,25 @@ import sys.FileSystem;
 class FileUtil
 {
   public static final FILE_FILTER_FNFC:FileFilter = new FileFilter("Friday Night Funkin' Chart (.fnfc)", "*.fnfc");
+  public static final FILE_FILTER_JSON:FileFilter = new FileFilter("JSON Data File (.json)", "*.json"); // Eric forgot, thank you for this fix.
   public static final FILE_FILTER_ZIP:FileFilter = new FileFilter("ZIP Archive (.zip)", "*.zip");
+  public static final FILE_FILTER_HXC:FileFilter = new FileFilter("HScript File (.hxc)", "*.hxc");
   public static final FILE_FILTER_PNG:FileFilter = new FileFilter("PNG Image (.png)", "*.png");
 
   public static final FILE_EXTENSION_INFO_FNFC:FileDialogExtensionInfo =
     {
       extension: 'fnfc',
       label: 'Friday Night Funkin\' Chart',
+    };
+  public static final FILE_EXTENSION_INFO_JSON:FileDialogExtensionInfo =
+    {
+      extension: 'json',
+      label: 'JSON Data File',
+    };
+  public static final FILE_EXTENSION_INFO_HXC:FileDialogExtensionInfo =
+    {
+      extension: 'hxc',
+      label: 'HScript File',
     };
   public static final FILE_EXTENSION_INFO_ZIP:FileDialogExtensionInfo =
     {

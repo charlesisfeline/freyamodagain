@@ -405,61 +405,78 @@ enum abstract ScoringRank(String)
   var GOOD;
   var SHIT;
 
-  @:op(A > B) static function compare(a:Null<ScoringRank>, b:Null<ScoringRank>):Bool
+  /**
+   * Converts ScoringRank to an integer value for comparison.
+   * Better ranks should be tied to a higher value.
+   */
+  static function getValue(rank:Null<ScoringRank>):Int
+  {
+    if (rank == null) return -1;
+    switch (rank)
+    {
+      case PERFECT_GOLD:
+        return 5;
+      case PERFECT:
+        return 4;
+      case EXCELLENT:
+        return 3;
+      case GREAT:
+        return 2;
+      case GOOD:
+        return 1;
+      case SHIT:
+        return 0;
+      default:
+        return -1;
+    }
+  }
+
+  // Yes, we really need a different function for each comparison operator.
+  @:op(A > B) static function compareGT(a:Null<ScoringRank>, b:Null<ScoringRank>):Bool
   {
     if (a != null && b == null) return true;
     if (a == null || b == null) return false;
 
-    var temp1:Int = 0;
-    var temp2:Int = 0;
+    var temp1:Int = getValue(a);
+    var temp2:Int = getValue(b);
 
-    // temp 1
-    switch (a)
-    {
-      case PERFECT_GOLD:
-        temp1 = 5;
-      case PERFECT:
-        temp1 = 4;
-      case EXCELLENT:
-        temp1 = 3;
-      case GREAT:
-        temp1 = 2;
-      case GOOD:
-        temp1 = 1;
-      case SHIT:
-        temp1 = 0;
-      default:
-        temp1 = -1;
-    }
-
-    // temp 2
-    switch (b)
-    {
-      case PERFECT_GOLD:
-        temp2 = 5;
-      case PERFECT:
-        temp2 = 4;
-      case EXCELLENT:
-        temp2 = 3;
-      case GREAT:
-        temp2 = 2;
-      case GOOD:
-        temp2 = 1;
-      case SHIT:
-        temp2 = 0;
-      default:
-        temp2 = -1;
-    }
-
-    if (temp1 > temp2)
-    {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
+    return temp1 > temp2;
   }
+
+  @:op(A >= B) static function compareGTEQ(a:Null<ScoringRank>, b:Null<ScoringRank>):Bool
+  {
+    if (a != null && b == null) return true;
+    if (a == null || b == null) return false;
+
+    var temp1:Int = getValue(a);
+    var temp2:Int = getValue(b);
+
+    return temp1 >= temp2;
+  }
+
+  @:op(A < B) static function compareLT(a:Null<ScoringRank>, b:Null<ScoringRank>):Bool
+  {
+    if (a != null && b == null) return true;
+    if (a == null || b == null) return false;
+
+    var temp1:Int = getValue(a);
+    var temp2:Int = getValue(b);
+
+    return temp1 < temp2;
+  }
+
+  @:op(A <= B) static function compareLTEQ(a:Null<ScoringRank>, b:Null<ScoringRank>):Bool
+  {
+    if (a != null && b == null) return true;
+    if (a == null || b == null) return false;
+
+    var temp1:Int = getValue(a);
+    var temp2:Int = getValue(b);
+
+    return temp1 <= temp2;
+  }
+
+  // @:op(A == B) isn't necessary!
 
   /**
    * Delay in seconds
