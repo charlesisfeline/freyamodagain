@@ -372,7 +372,7 @@ class BaseCharacter extends Bopper
 
     if (!getCurrentAnimation().endsWith('-loop')
       && hasAnimation(getCurrentAnimation() + '-loop')
-      && isAnimationFinished()) // bw compat for psych chars in case youre porting shits
+      && isAnimationFinished()) // bw compat for psych chars in case youre porting shits.
     {
       playAnimation(getCurrentAnimation() + '-loop');
     }
