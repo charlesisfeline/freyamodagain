@@ -20,7 +20,7 @@ class WindowUtil
   /**
 	 * Gets the specified file's (or folder) attribute.
 	 */
-	public static function getFileAttribute(path:String, useAbsol:Bool = true):Windows.FileAttribute {
+	public static function getFileAttribute(path:String, useAbsol:Bool = true):WindowUtil.FileAttribute {
 		#if windows
 		if(useAbsol) path = sys.FileSystem.absolutePath(path);
 		return Windows.getFileAttribute(path);
@@ -32,7 +32,7 @@ class WindowUtil
 	/**
 	 * Sets the specified file's (or folder) attribute. If it fails, the return value is `0`.
 	 */
-	public static function setFileAttribute(path:String, attrib:FileAttribute, useAbsol:Bool = true):Int {
+	public static function setFileAttribute(path:String, attrib:WindowUtil.FileAttribute, useAbsol:Bool = true):Int {
 		#if windows
 		if(useAbsol) path = sys.FileSystem.absolutePath(path);
 		return Windows.setFileAttribute(path, attrib);
