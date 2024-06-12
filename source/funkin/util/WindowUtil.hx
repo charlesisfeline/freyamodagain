@@ -2,6 +2,7 @@ package funkin.util;
 
 import lime.app.Application;
 import flixel.util.FlxSignal.FlxTypedSignal;
+import funkin.util.tools.Windows;
 
 using StringTools;
 
