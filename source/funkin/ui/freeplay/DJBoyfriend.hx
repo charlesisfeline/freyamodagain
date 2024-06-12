@@ -165,6 +165,11 @@ class DJBoyfriend extends FlxAtlasSprite
       {
         currentState = (currentState == Idle ? TV : Idle);
       }
+
+      if (FlxG.keys.justPressed.NINE)
+      {
+        currentState = (currentState == Idle ? Spook : Idle);
+      }
     }
   }
 
@@ -181,7 +186,7 @@ class DJBoyfriend extends FlxAtlasSprite
       // trace('Finished idle');
       case "bf dj afk":
         // trace('Finished spook');
-        currentState = Idle;
+        currentState = Spook;
       case "Boyfriend DJ confirm":
 
       case "Boyfriend DJ fist pump":
