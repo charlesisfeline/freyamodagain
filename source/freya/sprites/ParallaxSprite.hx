@@ -7,6 +7,10 @@ import openfl.geom.Matrix;
 import flixel.graphics.frames.FlxFrame.FlxFrameAngle;
 import flixel.FlxObject;
 import flixel.math.FlxPoint;
+import flixel.FlxCamera;
+import flixel.FlxG;
+
+using StringTools;
 
 @enum
 enum Direction
@@ -16,7 +20,7 @@ enum Direction
   NULL;
 }
 
-class ParallaxSprite extends FlxSprite
+class ParallaxSprite extends flixel.FlxSprite
 {
   private var pointOne:FlxObject = new FlxObject();
   private var pointTwo:FlxObject = new FlxObject();
@@ -32,7 +36,7 @@ class ParallaxSprite extends FlxSprite
 
   /**
    * Creates a ParallaxSprite at specified position with a specified graphic.
-   * @param graphic		The graphic to load (uses haxeflixel's default if null)
+   * @param graphic		The graphic to load. (uses haxeflixel's default if null)
    * @param   X			The ParallaxSprite's initial X position.
    * @param   Y			The ParllaxSprite's initial Y position.
    */
