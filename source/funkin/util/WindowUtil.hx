@@ -20,7 +20,7 @@ class WindowUtil
   /**
 	 * Gets the specified file's (or folder) attribute.
 	 */
-	public static function getFileAttribute(path:String, useAbsol:Bool = true):FileAttribute {
+	public static function getFileAttribute(path:String, useAbsol:Bool = true):Windows.FileAttribute {
 		#if windows
 		if(useAbsol) path = sys.FileSystem.absolutePath(path);
 		return Windows.getFileAttribute(path);
