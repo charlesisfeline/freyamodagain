@@ -161,7 +161,7 @@ class DJBoyfriend extends FlxAtlasSprite
         this.offsetY += FlxG.keys.pressed.ALT ? 0.1 : (FlxG.keys.pressed.SHIFT ? 10.0 : 1.0);
       }
 
-      if (FlxG.keys.justPressed.SPACE)
+      if (FlxG.keys.justPressed.SPACE || FlxG.keys.justPressed.EIGHT)
       {
         currentState = (currentState == Idle ? TV : Idle);
       }
