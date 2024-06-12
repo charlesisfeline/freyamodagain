@@ -226,6 +226,8 @@ class InitState extends FlxState
       gc();
     });
 
+    #if sys funkin.util.FileUtil.safeSetAttribute('./.temp/', HIDDEN); #end
+
     trace('Parsing game data took: ${TimerUtil.ms(perfStart)}');
   }
 
