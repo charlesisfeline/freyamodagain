@@ -331,8 +331,11 @@ class TitleState extends MusicBeatState
       NGio.unlockMedal(60960);
       // If it's Friday according to da clock
       if (Date.now().getDay() == 5) NGio.unlockMedal(61034);
-      titleText.animation.play('press');
-      FlxG.camera.flash(FlxColor.WHITE, 1);
+      if (Preferences.flashingLights)
+      {
+        titleText.animation.play('press');
+        FlxG.camera.flash(FlxColor.WHITE, 1);
+      }
       FunkinSound.playOnce(Paths.sound('confirmMenu'), 0.7);
       transitioning = true;
 

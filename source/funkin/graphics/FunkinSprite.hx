@@ -10,6 +10,7 @@ import openfl.display.BitmapData;
 
 /**
  * An FlxSprite with additional functionality.
+ * Also skewable, allowing for at least a somewhat 3D-like effect.
  * - A more efficient method for creating solid color sprites.
  * - TODO: Better cache handling for textures.
  */

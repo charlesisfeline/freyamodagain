@@ -27,6 +27,25 @@ class Preferences
   }
 
   /**
+   * If enabled, hides the opponent notes and puts the player strums to the middle.
+   * @default `false`
+   */
+  public static var middlescroll(get, set):Bool;
+
+  static function get_middlescroll():Bool
+  {
+    return Save?.instance?.options?.middlescroll;
+  }
+
+  static function set_middlescroll(value:Bool):Bool
+  {
+    var save:Save = Save.instance;
+    save.options.middlescroll = value;
+    save.flush();
+    return value;
+  }
+
+  /**
    * Whether some particularly fowl language is displayed.
    * @default `true`
    */

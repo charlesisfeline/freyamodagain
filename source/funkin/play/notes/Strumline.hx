@@ -653,20 +653,6 @@ class Strumline extends FlxSpriteGroup
     return getByDirection(direction).isConfirm();
   }
 
-  public function playNoteHitSound(thyRating:String):Void
-  {
-    if (Preferences.noteHitSoundVolume <= 0 || Preferences.noteHitSound == NoteHitSoundType.None) return;
-
-    // TODO: Maybe add an option to change when the note hit sound can play (on sick scores OR on any good score)
-
-    if (thyRating == "sick")
-    {
-      var hitSound:String = Preferences.noteHitSound + "Hit";
-      var path:String = Paths.sound('noteHitSounds/${hitSound}') ?? Paths.sound('noteHitSounds/smackHit');
-      FunkinSound.playOnce(path, 0.5);
-    }
-  }
-
   public function playNoteSplash(direction:NoteDirection):Void
   {
     if (!Preferences.noteSplash) return;

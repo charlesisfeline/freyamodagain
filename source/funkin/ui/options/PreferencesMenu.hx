@@ -50,12 +50,15 @@ class PreferencesMenu extends Page
    */
   function createPrefItems():Void
   {
-    createPrefItemCheckbox('Naughtiness', 'Enable so your mom won\'t scream at ya. Right now it doesn\'nt do much', function(value:Bool):Void {
+    createPrefItemCheckbox('Naughtiness', 'Enable so your mom won\'t scream at ya, right now it doesn\'nt do much', function(value:Bool):Void {
       Preferences.naughtyness = value;
     }, Preferences.naughtyness);
     createPrefItemCheckbox('Downscroll', 'Enable to make notes move downwards', function(value:Bool):Void {
       Preferences.downscroll = value;
     }, Preferences.downscroll);
+    createPrefItemCheckbox('Middlescroll', 'Enable to center the player strums and hide the other', function(value:Bool):Void {
+      Preferences.middlescroll = value;
+    }, Preferences.middlescroll);
     createPrefItemCheckbox('Ghost Tapping', 'Enable to disable ghost misses', function(value:Bool):Void {
       Preferences.ghostTapping = value;
     }, Preferences.ghostTapping);

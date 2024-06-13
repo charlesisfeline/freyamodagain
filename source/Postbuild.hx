@@ -30,6 +30,9 @@ class Postbuild
       var buildTime:Float = roundToTwoDecimals(end - start);
 
       trace('Build took: ${buildTime} seconds');
+      #if !debug
+      trace("You won't get traces without a debugger however, just to improve performance. If you want to enable traces at risk, please recompile with -debug.");
+      #end
     }
   }
 

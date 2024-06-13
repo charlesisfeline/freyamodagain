@@ -50,7 +50,12 @@ class CreditsDataHandler
     return {
       entries: [
         {
-          header: 'Founders',
+          header: 'Freya Team',
+          body: [
+            {line: 'CharlesCatYT'}, {line: 'TheAnimateMan'}, {line: 'FreyaFennec_foxes'},]
+        },
+        {
+          header: 'Founders of FNF',
           body: [
             {line: 'ninjamuffin99'},
             {line: 'PhantomArcade'},
