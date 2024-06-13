@@ -2668,6 +2668,8 @@ class PlayState extends MusicBeatSubState
     }
     vocals.playerVolume = 0;
 
+    songMisses += 1;
+
     if (Highscore.tallies.combo != 0) if (Highscore.tallies.combo >= 10) comboPopUps.displayCombo(0);
 
     applyScore(-10, 'miss', healthChange, true);
