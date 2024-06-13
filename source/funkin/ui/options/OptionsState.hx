@@ -27,7 +27,7 @@ class OptionsState extends MusicBeatState
   {
     persistentUpdate = true;
 
-    FunkinSound.playMusic('optionsMenu',
+    FunkinSound.playMusic('optionsSong',
       {
         overrideExisting: true,
         restartTrack: false
