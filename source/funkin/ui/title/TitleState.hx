@@ -62,6 +62,7 @@ class TitleState extends MusicBeatState
 
     curWacky = FlxG.random.getObject(getIntroTextShit());
     FlxG.sound.cache(Paths.music('freakyMenu/freakyMenu'));
+    FlxG.sound.cache(Paths.music('optionsMenu/optionsMenu'));
     FlxG.sound.cache(Paths.music('girlfriendsRingtone/girlfriendsRingtone'));
 
     // DEBUG BULLSHIT

@@ -27,6 +27,12 @@ class OptionsState extends MusicBeatState
   {
     persistentUpdate = true;
 
+    FunkinSound.playMusic('optionsMenu',
+      {
+        overrideExisting: true,
+        restartTrack: false
+      });
+
     var menuBG = new FlxSprite().loadGraphic(Paths.image('menuBG'));
     var hsv = new HSVShader();
     hsv.hue = -0.6;
