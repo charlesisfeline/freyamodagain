@@ -16,6 +16,7 @@ import funkin.audio.FunkinSound;
 import funkin.data.song.SongRegistry;
 import funkin.ui.freeplay.FreeplayState;
 import funkin.graphics.FunkinSprite;
+import funkin.util.MathUtil;
 import funkin.play.cutscene.VideoCutscene;
 import funkin.play.PlayState;
 import funkin.ui.AtlasText;
@@ -451,11 +452,7 @@ class PauseSubState extends MusicBeatSubState
   function changeSelection(change:Int = 0):Void
   {
     // var prevEntry:Int = currentEntry;
-
-    currentEntry += change;
-
-    if (currentEntry < 0) currentEntry = currentMenuEntries.length - 1;
-    if (currentEntry >= currentMenuEntries.length) currentEntry = 0;
+    currentEntry = MathUtil.curSelectionWrap(currentEntry, change, currentMenuEntries);
 
     // if (currentEntry != prevEntry) FunkinSound.playOnce(Paths.sound('scrollMenu'), 0.4);
     if (change != 0) FunkinSound.playOnce(Paths.sound('scrollMenu'), 0.4);
