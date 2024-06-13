@@ -89,6 +89,7 @@ class Save
       options:
         {
           // Reasonable defaults.
+          noteSplash: true,
           naughtyness: true,
           downscroll: false,
           ghostTapping: false,
@@ -1050,6 +1051,12 @@ typedef SaveScoreTallyData =
  */
 typedef SaveDataOptions =
 {
+  /**
+   * Whenever to display a splash animation when perfectly hitting a note.
+   * @default `true`
+   */
+  var noteSplash:Bool;
+
   /**
    * Whether some particularly fowl language is displayed.
    * @default `true`

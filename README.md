@@ -1,4 +1,8 @@
-# Friday Night Funkin' 
+# Friday Night Funkin': Vs. Freya Crew
+
+what
+
+# Friday Night Funkin'
 
 Friday Night Funkin' is a rhythm game. Built using HaxeFlixel for Ludum Dare 47.
 

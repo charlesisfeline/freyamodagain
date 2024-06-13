@@ -8,6 +8,25 @@ import funkin.save.Save;
 class Preferences
 {
   /**
+   * Whenever to display a splash animation when perfectly hitting a note.
+   * @default `true`
+   */
+  public static var noteSplash(get, set):Bool;
+
+  static function get_noteSplash():Bool
+  {
+    return Save?.instance?.options?.noteSplash;
+  }
+
+  static function set_noteSplash(value:Bool):Bool
+  {
+    var save:Save = Save.instance;
+    save.options.noteSplash = value;
+    save.flush();
+    return value;
+  }
+
+  /**
    * Whether some particularly fowl language is displayed.
    * @default `true`
    */

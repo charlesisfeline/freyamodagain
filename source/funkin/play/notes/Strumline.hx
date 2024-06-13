@@ -653,10 +653,23 @@ class Strumline extends FlxSpriteGroup
     return getByDirection(direction).isConfirm();
   }
 
+  public function playNoteHitSound(thyRating:String):Void
+  {
+    if (Preferences.noteHitSoundVolume <= 0 || Preferences.noteHitSound == NoteHitSoundType.None) return;
+
+    // TODO: Maybe add an option to change when the note hit sound can play (on sick scores OR on any good score)
+
+    if (thyRating == "sick")
+    {
+      var hitSound:String = Preferences.noteHitSound + "Hit";
+      var path:String = Paths.sound('noteHitSounds/${hitSound}') ?? Paths.sound('noteHitSounds/smackHit');
+      FunkinSound.playOnce(path, 0.5);
+    }
+  }
+
   public function playNoteSplash(direction:NoteDirection):Void
   {
-    // TODO: Add a setting to disable note splashes.
-    // if (Settings.noSplash) return;
+    if (!Preferences.noteSplash) return;
     if (!noteStyle.isNoteSplashEnabled()) return;
 
     var splash:NoteSplash = this.constructNoteSplash();
@@ -676,8 +689,7 @@ class Strumline extends FlxSpriteGroup
 
   public function playNoteHoldCover(holdNote:SustainTrail):Void
   {
-    // TODO: Add a setting to disable note splashes.
-    // if (Settings.noSplash) return;
+    if (!Preferences.noteSplash) return;
     if (!noteStyle.isHoldNoteCoverEnabled()) return;
 
     var cover:NoteHoldCover = this.constructNoteHoldCover();
