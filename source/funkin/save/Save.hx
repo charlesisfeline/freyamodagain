@@ -92,6 +92,7 @@ class Save
           noteSplash: true,
           naughtyness: true,
           downscroll: false,
+          middlescroll: false,
           ghostTapping: false,
           flashingLights: true,
           zoomCamera: true,
@@ -129,7 +130,7 @@ class Save
           previousFiles: [],
           noteQuant: 3,
           chartEditorLiveInputStyle: ChartEditorLiveInputStyle.None,
-          theme: ChartEditorTheme.Light,
+          theme: ChartEditorTheme.Dark,
           playtestStartTime: false,
           downscroll: false,
           metronomeVolume: 1.0,
@@ -1068,6 +1069,12 @@ typedef SaveDataOptions =
    * @default `false`
    */
   var downscroll:Bool;
+
+  /**
+   * If enabled, the player strums are at the middle of the screen. This was originally a gimmick for Blazin', but I added it as an option cuz why not?
+   * @default `false`
+   */
+  var middlescroll:Bool;
 
   /**
    * If true, the player will not receive the ghost miss penalty if there are no notes within the hit window.

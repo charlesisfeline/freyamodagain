@@ -654,6 +654,8 @@ enum abstract CharacterRenderType(String) from String to String
 
 /**
  * The JSON data schema used to define a character.
+ *
+ * This is the same guy who put custom characters into Kade Engine, just telling ya.
  */
 typedef CharacterData =
 {

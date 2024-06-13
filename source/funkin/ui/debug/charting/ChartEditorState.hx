@@ -633,6 +633,7 @@ class ChartEditorState extends UIState // UIState derives from MusicBeatState
    * The current theme used by the editor.
    * Dictates the appearance of many UI elements.
    * Currently hardcoded to just Light and Dark.
+   * TODO: Add custom themes via CSS, lol.
    */
   var currentTheme(default, set):ChartEditorTheme = ChartEditorTheme.Light;
 
