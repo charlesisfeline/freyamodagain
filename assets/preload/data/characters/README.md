@@ -8,37 +8,37 @@ Notes to self:
 ## Example:
 ```jsonc
 {
-  "version": "1.0.0",
-  "renderType": "sparrow",
-  "offsets": [0, 0],
-  "danceEvery": 1,
-  "scale": 1.0,
-  "name": "Daddy Dearest",
-  "flipX": true,
-  "cameraOffsets": [0, 0],
-  "singTime": 8.0,
-  "startingAnimation": "idle",
-  "isPixel": false,
-  "assetPath": "characters/daddyDearest",
-  "healthIcon": {
-    "offsets": [0, 0],
-    "id": "dad",
-    "flipX": false,
-    "isPixel": false,
-    "scale": 1
+  "version": "1.0.0", // The version of... I don't know.
+  "renderType": "sparrow", // The type of spritehseet you got. (Sparrow, Packer, AnimateAltas, and MultiSparrow.)
+  "offsets": [0, 0], // The global offsets.
+  "danceEvery": 1, // Every time your character bops on beat, I think.
+  "scale": 1.0, // The size of the character, 6 for pixel.
+  "name": "Daddy Dearest", // The character name, shown in the Chart Editor.
+  "flipX": true, // Flips the character.
+  "cameraOffsets": [0, 0], // The offsets the camera should get to when it's this character's turn.
+  "singTime": 8.0, // Probably for the non-hold notes.
+  "startingAnimation": "idle", // I don't know, the idle animation set?
+  "isPixel": false, // Whether it's a pixel character or not.
+  "assetPath": "characters/daddyDearest", // The path of your spritesheet, THE XML FILENAME MUST BE THE SAME AS THE SPRITESHEET NAME!!!
+  "healthIcon": { // The health icon prefs.
+    "offsets": [0, 0], // Offsets.
+    "id": "dad", // Your icon name.
+    "flipX": false, // Flips the icons.
+    "isPixel": false, // Pixel icon?
+    "scale": 1 // The icon size.
   },
-  "pixelIcon": {
-    "id": "daddy"
+  "pixelIcon": { // Used in Freeplay & Chart Editor.
+    "id": "daddy" // Your icon name.
   },
-  "animations": [
+  "animations": [ // The array of animations your character has.
     {
-      "name": "idle",
-      "prefix": "idle",
-      "looped": false,
-      "frameRate": 24,
-      "flipY": false,
-      "flipX": false,
-      "offsets": [0, 0]
+      "name": "idle", // The animation name.
+      "prefix": "idle", // The animation prefix/name, in the XML.
+      "looped": false, // Whether your animation loops or not, useful for hold animations.
+      "frameRate": 24, // FPS of your animation, however it isn't functional. (Tested to see.)
+      "flipY": false, // Flipped vertically?
+      "flipX": false, // Flipped horizionally?
+      "offsets": [0, 0] // The animation offsets!
     },
     {
       "name": "idle-hold",

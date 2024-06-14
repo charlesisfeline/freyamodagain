@@ -1151,7 +1151,7 @@ class PlayState extends MusicBeatSubState
 
         if (FlxG.sound.music != null) FlxG.sound.music.pause();
 
-        deathCounter += 1;
+        deathCounter += 2;
 
         dispatchEvent(new ScriptEvent(GAME_OVER));
 

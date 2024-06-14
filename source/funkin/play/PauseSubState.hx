@@ -313,7 +313,7 @@ class PauseSubState extends MusicBeatSubState
     metadataDifficulty.scrollFactor.set(0, 0);
     metadata.add(metadataDifficulty);
 
-    metadataDeaths = new FlxText(20, metadataDifficulty.y + 32, FlxG.width - 40, '${PlayState.instance?.deathCounter} Blue Balls');
+    metadataDeaths = new FlxText(20, metadataDifficulty.y + 32, FlxG.width - 40, '${PlayState.instance?.deathCounter} Blueballs');
     metadataDeaths.setFormat(Paths.font('vcr.ttf'), 32, FlxColor.WHITE, FlxTextAlign.RIGHT);
     metadataDeaths.scrollFactor.set(0, 0);
     metadata.add(metadataDeaths);
@@ -600,7 +600,7 @@ class PauseSubState extends MusicBeatSubState
     switch (this.currentMode)
     {
       case Standard | Difficulty:
-        metadataDeaths.text = '${PlayState.instance?.deathCounter} Blue Balls';
+        metadataDeaths.text = '${PlayState.instance?.deathCounter} Blueballs';
       case Charting:
         metadataDeaths.text = 'Chart Editor Preview';
       case Conversation:
