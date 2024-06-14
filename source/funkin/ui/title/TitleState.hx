@@ -205,13 +205,13 @@ class TitleState extends MusicBeatState
       ngSpr.loadGraphic(Paths.image('newgrounds_logo_animated'), true, 600);
       ngSpr.animation.add('idle', [0, 1], 4);
       ngSpr.animation.play('idle');
-      ngSpr.setGraphicSize(Std.int(ngSpr.width * 0.55));
+      ngSpr.setGraphicSize(ngSpr.width * 0.55);
       ngSpr.y += 25;
     }
     else
     {
       ngSpr.loadGraphic(Paths.image('newgrounds_logo'));
-      ngSpr.setGraphicSize(Std.int(ngSpr.width * 0.8));
+      ngSpr.setGraphicSize(ngSpr.width * 0.8);
     }
 
     add(ngSpr);

@@ -3,6 +3,9 @@ package funkin.ui.options;
 import flixel.FlxCamera;
 import flixel.FlxObject;
 import flixel.FlxSprite;
+import flixel.text.FlxText;
+import flixel.math.FlxMath;
+import flixel.util.FlxColor;
 import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import funkin.ui.AtlasText.AtlasFont;
 import funkin.ui.options.OptionsState.Page;
@@ -12,15 +15,26 @@ import funkin.util.Constants;
 
 class PreferencesMenu extends Page
 {
+  inline static final DESC_BG_OFFSET_X = 15.0;
+  inline static final DESC_BG_OFFSET_Y = 15.0;
+  static var DESC_TEXT_WIDTH:Null<Float>;
+
   var items:TextMenuList;
   var preferenceItems:FlxTypedSpriteGroup<FlxSprite>;
+
+  var preferenceDesc:Array<String> = [];
 
   var menuCamera:FlxCamera;
   var camFollow:FlxObject;
 
+  var descText:FlxText;
+  var descTextBG:FlxSprite;
+
   public function new()
   {
     super();
+
+    if (DESC_TEXT_WIDTH == null) DESC_TEXT_WIDTH = FlxG.width * 0.8;
 
     menuCamera = new FunkinCamera('prefMenu');
     FlxG.cameras.add(menuCamera, false);
@@ -29,6 +43,25 @@ class PreferencesMenu extends Page
 
     add(items = new TextMenuList());
     add(preferenceItems = new FlxTypedSpriteGroup<FlxSprite>());
+
+    descTextBG = new FlxSprite().makeGraphic(1, 1, 0x80000000);
+    descTextBG.scrollFactor.set();
+    descTextBG.antialiasing = false;
+    descTextBG.active = false;
+
+    descText = new FlxText(0, 0, 0, "NUH UH", 26);
+    descText.scrollFactor.set();
+    descText.font = Paths.font("vcr.tff");
+    descText.alignment = CENTER;
+    descText.setBorderStyle(OUTLINE, FlxColor.BLACK, 2);
+    // descText.antialiasing = false;
+
+    descTextBG.x = descText.x - DESC_BG_OFFSET_X;
+    descTextBG.scale.x = descText.width + DESC_BG_OFFSET_X * 2;
+    descTextBG.updateHitbox();
+
+    add(descTextBG);
+    add(descText);
 
     createPrefItems();
 
@@ -39,8 +72,31 @@ class PreferencesMenu extends Page
     var margin = 100;
     menuCamera.deadzone.set(0, margin, menuCamera.width, menuCamera.height - margin * 2);
 
+    var prevIndex = 0;
+    var prevItem = items.selectedItem;
     items.onChange.add(function(selected) {
       camFollow.y = selected.y;
+
+      prevItem.x = 120;
+      selected.x = 150;
+
+      final newDesc = preferenceDesc[items.selectedIndex];
+      final showDesc = (newDesc != null && newDesc.length != 0);
+      descText.visible = descTextBG.visible = showDesc;
+      if (showDesc)
+      {
+        descText.text = newDesc;
+        descText.fieldWidth = descText.width > DESC_TEXT_WIDTH ? DESC_TEXT_WIDTH : 0;
+        descText.screenCenter(X).y = FlxG.height * 0.85 - descText.height * 0.5;
+
+        descTextBG.x = descText.x - DESC_BG_OFFSET_X;
+        descTextBG.y = descText.y - DESC_BG_OFFSET_Y;
+        descTextBG.scale.set(descText.width + DESC_BG_OFFSET_X * 2, descText.height + DESC_BG_OFFSET_Y * 2);
+        descTextBG.updateHitbox();
+      }
+
+      prevIndex = items.selectedIndex;
+      prevItem = selected;
     });
   }
 
@@ -89,6 +145,7 @@ class PreferencesMenu extends Page
     }, true);
 
     preferenceItems.add(checkbox);
+    preferenceDesc.push(prefDesc);
   }
 
   override function update(elapsed:Float)
@@ -98,9 +155,7 @@ class PreferencesMenu extends Page
     // Indent the selected item.
     // TODO: Only do this on menu change?
     items.forEach(function(daItem:TextMenuItem) {
-      if (items.selectedItem == daItem) daItem.x = 150;
-      else
-        daItem.x = 120;
+      daItem.x = items.selectedItem == daItem ? 150 : 120;
     });
   }
 }

@@ -52,8 +52,9 @@ import sys.io.File;
 class DebugBoundingState extends FlxState
 {
   /*
-    TODAY'S TO-DO
-    - Cleaner UI
+    TODAY'S TO-DO!!!!!!!
+    - Cleaner UI.
+    - Make this into a full-featured character editor now that we have custom character support.
    */
   var bg:FlxSprite;
   var fileInfo:FlxText;
