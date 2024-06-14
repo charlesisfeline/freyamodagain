@@ -29,9 +29,10 @@ class Postbuild
 
       var buildTime:Float = roundToTwoDecimals(end - start);
 
-      trace('Build took: ${buildTime} seconds');
+      haxe.Log.trace('Build took: ${buildTime} seconds', null);
       #if !debug
-      trace("You won't get traces without a debugger however, just to improve performance. If you want to enable traces at risk, please recompile with -debug.");
+      haxe.Log.trace("You won't get traces without a debugger however, just to improve performance. If you want to enable traces at risk, please recompile with -debug.",
+        null);
       #end
     }
   }
