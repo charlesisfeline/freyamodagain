@@ -105,27 +105,38 @@ class PreferencesMenu extends Page
    */
   function createPrefItems():Void
   {
-    createPrefItemCheckbox('Naughtiness', 'Enable so your mom won\'t scream at ya, right now it doesn\'nt do much', function(value:Bool):Void {
-      Preferences.naughtyness = value;
-    }, Preferences.naughtyness);
+    // Gameplay.
+    createPrefItemCheckbox('Ghost Tapping', 'Enable to disable ghost misses', function(value:Bool):Void {
+      Preferences.ghostTapping = value;
+    }, Preferences.ghostTapping);
+
+    // UI/HUD.
     createPrefItemCheckbox('Downscroll', 'Enable to make notes move downwards', function(value:Bool):Void {
       Preferences.downscroll = value;
     }, Preferences.downscroll);
     createPrefItemCheckbox('Middlescroll', 'Enable to center the player strums and hide the other', function(value:Bool):Void {
       Preferences.middlescroll = value;
     }, Preferences.middlescroll);
-    createPrefItemCheckbox('Ghost Tapping', 'Enable to disable ghost misses', function(value:Bool):Void {
-      Preferences.ghostTapping = value;
-    }, Preferences.ghostTapping);
     createPrefItemCheckbox('Note Splashes', 'Disable to remove splash animations when hitting notes', function(value:Bool):Void {
       Preferences.noteSplash = value;
     }, Preferences.noteSplash);
-    createPrefItemCheckbox('Flashing Lights', 'Disable to dampen flashing effects', function(value:Bool):Void {
-      Preferences.flashingLights = value;
-    }, Preferences.flashingLights);
     createPrefItemCheckbox('Camera Zooming on Beat', 'Disable to stop the camera bouncing to the song', function(value:Bool):Void {
       Preferences.zoomCamera = value;
     }, Preferences.zoomCamera);
+    createPrefItemCheckbox('Judgement Counter', 'Enable to show the judgement info on the left side', function(value:Bool):Void {
+      Preferences.judgementsText = value;
+    }, Preferences.judgementsText);
+    createPrefItemCheckbox('Judgement Popups', 'Enable to show the judgement popups every note hit', function(value:Bool):Void {
+      Preferences.judgementsText = value;
+    }, Preferences.judgementsText);
+
+    // Misc.
+    createPrefItemCheckbox('Naughtiness', 'Enable so your mom won\'t scream at ya, right now it doesn\'nt do much', function(value:Bool):Void {
+      Preferences.naughtyness = value;
+    }, Preferences.naughtyness);
+    createPrefItemCheckbox('Flashing Lights', 'Disable to dampen flashing effects', function(value:Bool):Void {
+      Preferences.flashingLights = value;
+    }, Preferences.flashingLights);
     createPrefItemCheckbox('Debug Display', 'Enable to show FPS and other debug stats', function(value:Bool):Void {
       Preferences.debugDisplay = value;
     }, Preferences.debugDisplay);

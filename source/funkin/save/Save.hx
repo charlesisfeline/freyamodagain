@@ -96,6 +96,8 @@ class Save
           ghostTapping: false,
           flashingLights: true,
           zoomCamera: true,
+          judgementsText: true,
+          comboPopUp: true,
           debugDisplay: false,
           autoPause: true,
           inputOffset: 0,

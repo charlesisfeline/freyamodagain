@@ -27,6 +27,44 @@ class Preferences
   }
 
   /**
+   * Whenever to display judgement popups every time a note gets hit.
+   * @default `true`
+   */
+  public static var comboPopUp(get, set):Bool;
+
+  static function get_comboPopUp():Bool
+  {
+    return Save?.instance?.options?.comboPopUp;
+  }
+
+  static function set_comboPopUp(value:Bool):Bool
+  {
+    var save:Save = Save.instance;
+    save.options.comboPopUp = value;
+    save.flush();
+    return value;
+  }
+
+  /**
+   * Whenever to display the judgement info text on the left side of the screen.
+   * @default `true`
+   */
+  public static var judgementsText(get, set):Bool;
+
+  static function get_judgementsText():Bool
+  {
+    return Save?.instance?.options?.judgementsText;
+  }
+
+  static function set_judgementsText(value:Bool):Bool
+  {
+    var save:Save = Save.instance;
+    save.options.judgementsText = value;
+    save.flush();
+    return value;
+  }
+
+  /**
    * If enabled, hides the opponent notes and puts the player strums to the middle.
    * @default `false`
    */
