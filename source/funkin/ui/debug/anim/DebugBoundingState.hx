@@ -103,7 +103,6 @@ class DebugBoundingState extends FlxState
     // };
 
     hudCam = new FunkinCamera('offsetCam');
-    ;
     hudCam.bgColor.alpha = 0;
 
     bg = new FlxBackdrop(FlxGridOverlay.createGrid(10, 10, FlxG.width, FlxG.height, true, 0xffe7e6e6, 0xffd9d5d5));
