@@ -787,7 +787,7 @@ class PlayState extends MusicBeatSubState
     judgementCounter.scrollFactor.set();
     judgementCounter.screenCenter(Y);
     judgementCounter.borderSize = 1.25;
-    add(judgementCounter);
+    if (Preferences.judgementsText) add(judgementCounter);
 
     judgementCounter.text = 'NPS: 0 (Max: 0)\n\nSick!! - 0\nGood! - 0\nBad - 0\nShit - 0';
 
@@ -796,7 +796,7 @@ class PlayState extends MusicBeatSubState
     // Initialize the judgements and combo meter.
     comboPopUps = new PopUpStuff();
     comboPopUps.zIndex = 900;
-    add(comboPopUps);
+    if (Preferences.comboPopUp) add(comboPopUps);
     comboPopUps.cameras = [camHUD];
 
     #if discord_rpc
@@ -839,10 +839,11 @@ class PlayState extends MusicBeatSubState
     rightWatermarkText.cameras = [camHUD];
 
     // Initialize some debug stuff.
-    #if (debug || FORCE_DEBUG_VERSION || DEBUG_SHITS)
+    // #if (debug || FORCE_DEBUG_VERSION || DEBUG_SHITS)
     // Display the version number (and git commit hash) in the bottom right corner.
     this.rightWatermarkText.text = "FNF " + Constants.VERSION;
 
+    #if (debug || FORCE_DEBUG_VERSION || DEBUG_SHITS)
     FlxG.console.registerObject('playState', this);
     #end
 
@@ -1689,7 +1690,7 @@ class PlayState extends MusicBeatSubState
     scoreText.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
     scoreText.scrollFactor.set();
     scoreText.zIndex = 851;
-    add(scoreText);
+    if (Preferences.scoreText) add(scoreText);
 
     // Move the health bar to the HUD camera.
     healthBar.cameras = [camHUD];
@@ -2183,7 +2184,7 @@ class PlayState extends MusicBeatSubState
   /**
    * Updates the position and contents of the score display.
    */
-  function updateScoreText():Void
+  public function updateScoreText():Void
   {
     var accuracy:String = "?";
     if (totalNotesPlayed != 0)
@@ -2193,7 +2194,7 @@ class PlayState extends MusicBeatSubState
     }
 
     // TODO: Add functionality for modules to update the score text.
-    scoreText.text = 'Score: $songScore • Misses: $songMisses • Accuracy: $accuracy';
+    scoreText.text = '[ Score: $songScore • Misses: $songMisses/$totalNotesPlayed • Accuracy: $accuracy ]';
   }
 
   /**
@@ -2206,7 +2207,7 @@ class PlayState extends MusicBeatSubState
     if (scoreTween != null) scoreTween.cancel();
 
     scoreText.scale.x = 1.075;
-    scoreText.scale.y = 1.075;
+    scoreText.scale.y = 2;
     scoreTween = FlxTween.tween(scoreText.scale, {x: 1, y: 1}, 0.2,
       {
         onComplete: (twn:FlxTween) -> {
