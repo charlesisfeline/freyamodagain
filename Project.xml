@@ -4,9 +4,15 @@ xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/
 
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Friday Night Funkin': Vs. Freya Crew" file="FNFFreya" packageName="com.funkin.fnf" package="com.funkin.fnf" main="Main" version="0.4.1" company="ninjamuffin99" />
+	<app title="Friday Night Funkin': Vs. Freya Crew" packageName="com.funkin.fnffreya" package="com.funkin.fnffreya" main="Main" version="0.4.1" company="CharlesCatYT" />
 	<app preloader="funkin.ui.transition.preload.FunkinPreloader" />
 	<set name="SWF_VERSION" value="11.8" />
+
+	<app file="KitsuneEngine_WIN" if="windows" />
+	<app file="KitsuneEngine_LINUX" if="linux" />
+	<app file="KitsuneEngine_MAC" if="mac" />
+	<app file="KitsuneEngine_ANDROID" if="android" />
+	<app file="KitsuneEngine_IOS" if="ios" />
 
 	<!-- ____________________________ Window Settings ___________________________ -->
 
@@ -20,7 +26,7 @@ xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/
 	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" vsync="false" />
 
 	<!--Mobile-specific-->
-	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false" />
+	<window if="mobile" orientation="landscape" fullscreen="true" width="1280" height="720" resizable="false" />
 
 	<!-- _____________________________ Path Settings ____________________________ -->
 
@@ -104,6 +110,8 @@ xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/
 	-->
 	<assets path="art/readme.txt" rename="do NOT readme.txt" library="art"/>
 	<assets path="CHANGELOG.md" rename="changelog.txt" library="art"/>
+	<assets path='LICENSE.md' rename='LICENSE.txt' /> <!-- dont touch! -->
+	<assets path='Modding.md' rename='moddingGuide.txt' /> <!-- dont touch! -->
 
 	<assets path="assets/fonts" />
 
@@ -166,6 +174,9 @@ xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/
 
 	<!-- Ensure all Funkin' classes are available at runtime. -->
 	<haxeflag name="--macro" value="include('funkin')" />
+
+	<haxeflag name="--macro" value="allowPackage('flash')" />
+	<haxeflag name="--macro" value="include('my.pack')" />
 
 	<!-- Ensure all UI components are available at runtime. -->
 	<haxeflag name="--macro" value="include('haxe.ui.backend.flixel.components')" />
@@ -258,6 +269,28 @@ xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/
 	<section unless="FILE_DROP_UNSUPPORTED">
 		<haxedef name="FILE_DROP_SUPPORTED" />
 	</section>
+
+	<target id="haxe" tool="linker" if="linux">
+		<lib name="/usr/lib64/libX11.so" if="HXCPP_M64" /> <!-- linux support -->
+	</target>
+	<target id="haxe" tool="linker" if="macos">
+		<lib name="/lib64/libX11.a" if="HXCPP_M64" /> <!-- mac support -->
+	</target>
+
+	<error value="You're using an outdated version of Haxe. Please update to 4.3.0 or greater. (TODO: Add 4.2.5 support)"
+		if="${haxe == 4.1.0} ||
+		${haxe == 4.1.1} ||
+		${haxe == 4.1.2} ||
+		${haxe == 4.1.3} ||
+		${haxe == 4.1.4} ||
+		${haxe == 4.1.5} ||
+		${haxe == 4.2.0} ||
+		${haxe == 4.2.1} ||
+		${haxe == 4.2.2} ||
+		${haxe == 4.2.3} ||
+		${haxe == 4.2.4} ||
+		${haxe == 4.2.5} ||
+		" />
 
 	<!-- Enable this on platforms which do not support the edsior views. -->
 	<haxedef name="CHART_EDITOR_UNSUPPORTED" if="web || mobile" />
