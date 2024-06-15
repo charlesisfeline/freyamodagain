@@ -93,7 +93,8 @@ class Save
           naughtyness: true,
           downscroll: false,
           middlescroll: false,
-          ghostTapping: false,
+          ghostTapping: true,
+          antialiasing: true,
           flashingLights: true,
           zoomCamera: true,
           judgementsText: true,
@@ -1079,9 +1080,15 @@ typedef SaveDataOptions =
   var middlescroll:Bool;
 
   /**
+   * If enabled, makes the graphics look sharper, however it can reduce performance.
+   * @default `true`
+   */
+  var antialiasing:Bool;
+
+  /**
    * If true, the player will not receive the ghost miss penalty if there are no notes within the hit window.
    * This is the thing people have been begging for forever lolol.
-   * @default `false`
+   * @default `true`
    */
   var ghostTapping:Bool;
 

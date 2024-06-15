@@ -130,6 +130,11 @@ class PreferencesMenu extends Page
       Preferences.judgementsText = value;
     }, Preferences.judgementsText);
 
+    // Graphics, you need this.
+    createPrefItemCheckbox('Anti-Aliasing', 'Disable to increase performance at the cost of sharper visuals.', function(value:Bool):Void {
+      Preferences.antialiasing = value;
+    }, Preferences.antialiasing);
+
     // Misc.
     createPrefItemCheckbox('Naughtiness', 'Enable so your mom won\'t scream at ya, right now it doesn\'nt do much', function(value:Bool):Void {
       Preferences.naughtyness = value;
@@ -174,6 +179,7 @@ class PreferencesMenu extends Page
 class CheckboxPreferenceItem extends FlxSprite
 {
   public var currentValue(default, set):Bool;
+  public var follower:TextMenuList;
 
   public function new(x:Float, y:Float, defaultValue:Bool = false)
   {

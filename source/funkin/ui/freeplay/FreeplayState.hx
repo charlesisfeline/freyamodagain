@@ -224,6 +224,12 @@ class FreeplayState extends MusicBeatSubState
     super(FlxColor.TRANSPARENT);
   }
 
+  public override function beatHit():Bool
+  {
+    if (dj != null) dj.bop();
+    return super.beatHit();
+  }
+
   override function create():Void
   {
     super.create();
@@ -260,7 +266,7 @@ class FreeplayState extends MusicBeatSubState
 
     if (prepForNewRank == false)
     {
-      FunkinSound.playMusic('freakyMenu',
+      FunkinSound.playMusic('freeplayRandom',
         {
           overrideExisting: true,
           restartTrack: false
@@ -799,6 +805,7 @@ class FreeplayState extends MusicBeatSubState
       funnyMenu.ID = i;
       funnyMenu.capsule.alpha = 0.5;
       funnyMenu.songText.visible = false;
+      funnyMenu.initJumpIn(0, force);
       funnyMenu.favIcon.visible = tempSongs[i].isFav;
       funnyMenu.favIconBlurred.visible = tempSongs[i].isFav;
       funnyMenu.hsvShader = hsvShader;

@@ -84,6 +84,9 @@ class DJBoyfriend extends FlxAtlasSprite
 
   var lowPumpLoopPoint:Int = 4;
 
+  public function bop()
+    if (currentState == Idle) playFlashAnimation('Boyfriend DJ', true);
+
   public override function update(elapsed:Float):Void
   {
     super.update(elapsed);
@@ -98,7 +101,7 @@ class DJBoyfriend extends FlxAtlasSprite
         // We are in this state the majority of the time.
         if (getCurrentAnimation() != 'Boyfriend DJ')
         {
-          playFlashAnimation('Boyfriend DJ', true);
+          playFlashAnimation('Boyfriend DJ');
         }
 
         if (getCurrentAnimation() == 'Boyfriend DJ' && this.isLoopFinished())

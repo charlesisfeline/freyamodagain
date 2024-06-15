@@ -49,12 +49,14 @@ class OptionsState extends MusicBeatState
     var options = addPage(Options, new OptionsMenu());
     var preferences = addPage(Preferences, new PreferencesMenu());
     var controls = addPage(Controls, new ControlsMenu());
+    var wardrobe = addPage(Wardrobe, new CharacterSelect());
 
     if (options.hasMultipleOptions())
     {
       options.onExit.add(exitToMainMenu);
       controls.onExit.add(exitControls);
       preferences.onExit.add(switchPage.bind(Options));
+      wardrobe.onExit.add(switchPage.bind(Options));
     }
     else
     {
@@ -190,6 +192,7 @@ class OptionsMenu extends Page
     add(items = new TextMenuList());
     createItem("PREFERENCES", function() switchPage(Preferences));
     createItem("CONTROLS", function() switchPage(Controls));
+    createItem("WARDROBE", function() switchPage(Wardrobe));
     createItem("INPUT OFFSETS", function() {
       FlxG.state.openSubState(new LatencyState());
     });
@@ -269,7 +272,9 @@ enum abstract PageName(String)
 {
   var Options = "options";
   var Controls = "controls";
+  var Wardrobe = "wardrobe";
   var Colors = "colors";
   var Mods = "mods";
+  var SoundTest = "soundtest";
   var Preferences = "preferences";
 }
