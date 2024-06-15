@@ -359,6 +359,12 @@ class Constants
   public static final MP3_DELAY_MS:Float = 528 / 44100 * Constants.MS_PER_SEC;
 
   /**
+   * The maximum desync the music time and conductor's song position
+   * can have without having to resync it.
+   */
+  public static final DESYNC_OFFSET:Float = 100;
+
+  /**
    * Each step of the preloader has to be on screen at least this long.
    *
    * 0 = The preloader immediately moves to the next step when it's ready.
