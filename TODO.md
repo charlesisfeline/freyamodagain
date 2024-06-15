@@ -13,11 +13,11 @@
 	- [ ] Step based zooming
   - [ ] Optimization & Bug fixes
 - [ ] Character Editor
-	- [x] Animation Editing
-	- [x] Animation Deletion/Creationg
-	- [x] Character Info Editing
-	- [x] Character Saving
-	- [x] Add Undos to Actions
+	- [ ] Animation Editing
+	- [ ] Animation Deletion/Creationg
+	- [ ] Character Info Editing
+	- [ ] Character Saving
+	- [ ] Add Undos to Actions
 	- [ ] Change Stage
 	- [ ] New Character Button
 - [ ] Fix Ratings Lag
