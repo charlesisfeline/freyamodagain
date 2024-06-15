@@ -7,6 +7,7 @@ import flixel.group.FlxGroup;
 import flixel.input.mouse.FlxMouseButton.FlxMouseButtonID;
 import flixel.input.mouse.FlxMouseEvent;
 import flixel.math.FlxPoint;
+import funkin.graphics.FunkinCamera;
 import funkin.ui.MusicBeatState;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;

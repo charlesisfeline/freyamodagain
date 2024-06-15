@@ -5,6 +5,7 @@ import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.ui.FlxUIDropDownMenu;
 import flixel.FlxCamera;
+import funkin.graphics.FunkinCamera;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.graphics.frames.FlxAtlasFrames;

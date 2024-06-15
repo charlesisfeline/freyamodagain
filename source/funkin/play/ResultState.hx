@@ -288,7 +288,7 @@ class ResultState extends MusicBeatSubState
             bfShit.playAnimation('Loop Start');
           }
         });
-      case MISS:
+        // case MISS:
         // TODO: Add Miss animation. Should have BF hanging, like in the fanmade one.
     }
 

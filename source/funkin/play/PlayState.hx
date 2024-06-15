@@ -7,6 +7,7 @@ import flixel.FlxCamera;
 import flixel.FlxObject;
 import flixel.FlxState;
 import flixel.FlxSubState;
+import flixel.FlxSprite;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
