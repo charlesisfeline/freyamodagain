@@ -51,7 +51,7 @@ class PreferencesMenu extends Page
 
     descText = new FlxText(0, 0, 0, "NUH UH", 26);
     descText.scrollFactor.set();
-    descText.font = Paths.font("vcr.tff");
+    descText.font = Paths.font('vcr.ttf');
     descText.alignment = CENTER;
     descText.setBorderStyle(OUTLINE, FlxColor.BLACK, 2);
     // descText.antialiasing = false;
