@@ -1114,6 +1114,18 @@ typedef SaveDataOptions =
   var inputOffset:Int;
 
   /**
+   * Adds judgements counter text.
+   * @default `true`
+   */
+  var judgementsText:Bool;
+
+  /**
+   * Makes combo show up.
+   * @default `true`
+   */
+  var comboPopUp:Bool;
+
+  /**
    * Affects the delay between the audio and the visuals during gameplay
    * @default `0`
    */

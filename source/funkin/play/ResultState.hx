@@ -160,33 +160,52 @@ class ResultState extends MusicBeatSubState
     switch (rank)
     {
       case PERFECT | PERFECT_GOLD:
-        heartsPerfect = new FlxAtlasSprite(1342, 370, Paths.animateAtlas("resultScreen/results-bf/resultsPERFECT/hearts", "shared"));
-        heartsPerfect.visible = false;
-        heartsPerfect.zIndex = 501;
-        add(heartsPerfect);
+        // TODO: Actually do a PG version of the Perfect animation.
+        if (Preferences.naughtyness) // To actually apply to the option, people said it was sus, so I ended up using the excellent sprites for now.
+        {
+          heartsPerfect = new FlxAtlasSprite(1342, 370, Paths.animateAtlas("resultScreen/results-bf/resultsPERFECT/hearts", "shared"));
+          heartsPerfect.visible = false;
+          heartsPerfect.zIndex = 501;
+          add(heartsPerfect);
 
-        heartsPerfect.anim.onComplete = () -> {
-          if (heartsPerfect != null)
-          {
-            // bfPerfect.anim.curFrame = 137;
-            heartsPerfect.anim.curFrame = 43;
-            heartsPerfect.anim.play(); // unpauses this anim, since it's on PlayOnce!
-          }
-        };
+          heartsPerfect.anim.onComplete = () -> {
+            if (heartsPerfect != null)
+            {
+              // bfPerfect.anim.curFrame = 137;
+              heartsPerfect.anim.curFrame = 43;
+              heartsPerfect.anim.play(); // unpauses this anim, since it's on PlayOnce!
+            }
+          };
 
-        bfPerfect = new FlxAtlasSprite(1342, 370, Paths.animateAtlas("resultScreen/results-bf/resultsPERFECT", "shared"));
-        bfPerfect.visible = false;
-        bfPerfect.zIndex = 500;
-        add(bfPerfect);
+          bfPerfect = new FlxAtlasSprite(1342, 370, Paths.animateAtlas("resultScreen/results-bf/resultsPERFECT", "shared"));
+          bfPerfect.visible = false;
+          bfPerfect.zIndex = 500;
+          add(bfPerfect);
 
-        bfPerfect.anim.onComplete = () -> {
-          if (bfPerfect != null)
-          {
-            // bfPerfect.anim.curFrame = 137;
-            bfPerfect.anim.curFrame = 137;
-            bfPerfect.anim.play(); // unpauses this anim, since it's on PlayOnce!
-          }
-        };
+          bfPerfect.anim.onComplete = () -> {
+            if (bfPerfect != null)
+            {
+              // bfPerfect.anim.curFrame = 137;
+              bfPerfect.anim.curFrame = 137;
+              bfPerfect.anim.play(); // unpauses this anim, since it's on PlayOnce!
+            }
+          };
+        }
+        else
+        {
+          bfExcellent = new FlxAtlasSprite(1329, 429, Paths.animateAtlas("resultScreen/results-bf/resultsEXCELLENT", "shared"));
+          bfExcellent.visible = false;
+          bfExcellent.zIndex = 500;
+          add(bfExcellent);
+
+          bfExcellent.anim.onComplete = () -> {
+            if (bfExcellent != null)
+            {
+              bfExcellent.anim.curFrame = 28;
+              bfExcellent.anim.play(); // unpauses this anim, since it's on PlayOnce!
+            }
+          };
+        }
 
       case EXCELLENT:
         bfExcellent = new FlxAtlasSprite(1329, 429, Paths.animateAtlas("resultScreen/results-bf/resultsEXCELLENT", "shared"));
@@ -269,6 +288,8 @@ class ResultState extends MusicBeatSubState
             bfShit.playAnimation('Loop Start');
           }
         });
+      case MISS:
+        // TODO: Add Miss animation. Should have BF hanging, like in the fanmade one.
     }
 
     var diffSpr:String = 'diff_${params?.difficultyId ?? 'Normal'}';

@@ -531,6 +531,11 @@ class PlayState extends MusicBeatSubState
    * RENDER OBJECTS
    */
   /**
+   * What?
+   */
+  var funnySexBox:FlxSprite;
+
+  /**
    * The FlxText which displays the current score.
    */
   var scoreText:FlxText;
@@ -1667,7 +1672,7 @@ class PlayState extends MusicBeatSubState
   }
 
   /**
-   * Initializes the health bar on the HUD.
+   * Initializes the health bar & info bar on the HUD.
    */
   function initHealthBar():Void
   {
@@ -1685,16 +1690,22 @@ class PlayState extends MusicBeatSubState
     healthBar.zIndex = 801;
     add(healthBar);
 
+    funnySexBox = new FlxSprite(healthBarBG.x + healthBarBG.width - 545, healthBarBG.y + 41).makeGraphic(500, 20, FlxColor.BLACK);
+    funnySexBox.alpha = 0.3;
+    add(funnySexBox);
+
     // The score text below the health bar.
     scoreText = new FlxText(0, healthBarBG.y + 41, FlxG.width, "", 20);
     scoreText.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
     scoreText.scrollFactor.set();
     scoreText.zIndex = 851;
-    if (Preferences.scoreText) add(scoreText);
+    add(scoreText);
+    funnySexBox.scale.x = scoreText.fieldWidth;
 
     // Move the health bar to the HUD camera.
     healthBar.cameras = [camHUD];
     healthBarBG.cameras = [camHUD];
+    funnySexBox.cameras = [camHUD];
     scoreText.cameras = [camHUD];
   }
 
