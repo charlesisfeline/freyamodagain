@@ -14,6 +14,8 @@ xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/
 	<app file="KitsuneEngine_ANDROID" if="android" />
 	<app file="KitsuneEngine_IOS" if="ios" />
 
+	<setenv name="HAXEPATH" value="./"/>
+
 	<!-- ____________________________ Window Settings ___________________________ -->
 
 	<!--These window settings apply to all targets-->
@@ -177,21 +179,11 @@ xsi:schemaLocation="http://lime.openfl.org/project/1.0.4 http://lime.openfl.org/
 
 	<haxeflag name="--macro" value="allowPackage('flash')" />
 	<haxeflag name="--macro" value="include('my.pack')" />
-
-	<!-- Ensure all UI components are available at runtime. -->
-	<haxeflag name="--macro" value="include('haxe.ui.backend.flixel.components')" />
-	<haxeflag name="--macro" value="include('haxe.ui.containers.dialogs')" />
-	<haxeflag name="--macro" value="include('haxe.ui.containers.menus')" />
-	<haxeflag name="--macro" value="include('haxe.ui.containers.properties')" />
-	<haxeflag name="--macro" value="include('haxe.ui.core')" />
-	<haxeflag name="--macro" value="include('haxe.ui.components')" />
-	<haxeflag name="--macro" value="include('haxe.ui.containers')" />
-
 	<!--
-		Ensure additional class packages are available at runtime (some only really used by scripts).
+		Ensure additional class packages are available at runtime (some only really used by scripts/modules).
 		Ignore packages we can't include.
 	-->
-	<haxeflag name="--macro" value="include('flixel', true, [ 'flixel.addons.editors.spine.*', 'flixel.addons.nape.*', 'flixel.system.macros.*' ])" />
+	<haxeflag name="--macro" value="funkin.util.macro.AdditionalsClassesMacro.addAdditionalClasses()" />
 
 	<!-- Necessary to provide stack traces for HScript. -->
 	<haxedef name="hscriptPos" />
