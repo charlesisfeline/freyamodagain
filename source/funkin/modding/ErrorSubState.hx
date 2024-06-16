@@ -1,7 +1,5 @@
 package funkin.modding;
 
-package funkin.modding;
-
 import openfl.Lib;
 import flixel.FlxG;
 import flixel.FlxSprite;

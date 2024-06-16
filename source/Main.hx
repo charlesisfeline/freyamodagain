@@ -34,7 +34,7 @@ class Main extends Sprite
   @:dox(hide)
   public static var audioDisconnected:Bool = false;
 
-  public static var mainInstance:Main;
+  public static var instance:Main;
   public static var game:FlxGameEnhanced;
 
   var gameWidth:Int = 1280; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
