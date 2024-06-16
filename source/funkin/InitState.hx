@@ -15,6 +15,7 @@ import flixel.util.FlxColor;
 import funkin.util.macro.MacroUtil;
 import funkin.util.WindowUtil;
 import funkin.play.PlayStatePlaylist;
+import openfl.Assets;
 import openfl.display.BitmapData;
 import funkin.data.story.level.LevelRegistry;
 import funkin.data.notestyle.NoteStyleRegistry;
@@ -34,6 +35,9 @@ import funkin.util.TimerUtil;
 import funkin.util.TrackerUtil;
 #if discord_rpc
 import Discord.DiscordClient;
+#end
+#if linux
+import lime.graphics.Image;
 #end
 
 /**
@@ -66,6 +70,24 @@ class InitState extends FlxState
   {
     // Setup a bunch of important Flixel stuff.
     setupShit();
+
+    // micd up code for the watermark!!!!!!!!!
+    var bitmapData = Assets.getBitmapData("assets/images/freyaIcon.png");
+    if (Main.watermark == null)
+    {
+      Main.watermark = new Sprite();
+      Main.watermark.addChild(new Bitmap(bitmapData)); // Sets the graphic of the sprite to a Bitmap object, which uses our embedded BitmapData class.
+      Main.watermark.alpha = 0.4;
+      Main.watermark.x = Lib.application.window.width - 10 - Main.watermark.width;
+      Main.watermark.y = Lib.application.window.height - 10 - Main.watermark.height;
+      Lib.current.stage.addChild(Main.watermark);
+    }
+
+    // psych code.........
+    #if linux
+    var icon = Image.fromFile("icon.png");
+    Lib.current.stage.window.setIcon(icon);
+    #end
 
     // Load player options from save data.
     // Flixel has already loaded the save data, so we can just use it.

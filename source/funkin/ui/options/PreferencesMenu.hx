@@ -120,20 +120,29 @@ class PreferencesMenu extends Page
     createPrefItemCheckbox('Note Splashes', 'Disable to remove splash animations when hitting notes', function(value:Bool):Void {
       Preferences.noteSplash = value;
     }, Preferences.noteSplash);
-    createPrefItemCheckbox('Camera Zooming on Beat', 'Disable to stop the camera bouncing to the song', function(value:Bool):Void {
-      Preferences.zoomCamera = value;
-    }, Preferences.zoomCamera);
+    createPrefItemCheckbox('Colored Health Bar', 'Enable to use the health bar with character-based colors', function(value:Bool):Void {
+      Preferences.coloredHealthBar = value;
+    }, Preferences.coloredHealthBar);
     createPrefItemCheckbox('Judgement Counter', 'Enable to show the judgement info on the left side', function(value:Bool):Void {
       Preferences.judgementsText = value;
     }, Preferences.judgementsText);
     createPrefItemCheckbox('Judgement Popups', 'Enable to show the judgement popups every note hit', function(value:Bool):Void {
       Preferences.judgementsText = value;
     }, Preferences.judgementsText);
+    createPrefItemCheckbox('Song Position Bar', 'Enable to show the song position bar', function(value:Bool):Void {
+      Preferences.songPositionBar = value;
+    }, Preferences.songPositionBar);
+    createPrefItemCheckbox('Camera Zooming on Beat', 'Disable to stop the camera bouncing to the song', function(value:Bool):Void {
+      Preferences.zoomCamera = value;
+    }, Preferences.zoomCamera);
 
     // Graphics, you need this.
     createPrefItemCheckbox('Anti-Aliasing', 'Disable to increase performance at the cost of sharper visuals.', function(value:Bool):Void {
       Preferences.antialiasing = value;
     }, Preferences.antialiasing);
+    createPrefItemCheckbox('FPS Counter', 'Enable to show FPS and other debug stats', function(value:Bool):Void {
+      Preferences.debugDisplay = value;
+    }, Preferences.debugDisplay);
 
     // Misc.
     createPrefItemCheckbox('Naughtiness', 'Enable so your mom won\'t scream at ya, right now it doesn\'nt do much', function(value:Bool):Void {
@@ -142,9 +151,6 @@ class PreferencesMenu extends Page
     createPrefItemCheckbox('Flashing Lights', 'Disable to dampen flashing effects', function(value:Bool):Void {
       Preferences.flashingLights = value;
     }, Preferences.flashingLights);
-    createPrefItemCheckbox('Debug Display', 'Enable to show FPS and other debug stats', function(value:Bool):Void {
-      Preferences.debugDisplay = value;
-    }, Preferences.debugDisplay);
     createPrefItemCheckbox('Auto Pause', 'Automatically pause the game when it loses focus', function(value:Bool):Void {
       Preferences.autoPause = value;
     }, Preferences.autoPause);

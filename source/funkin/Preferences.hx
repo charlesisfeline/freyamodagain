@@ -223,6 +223,25 @@ class Preferences
   }
 
   /**
+   * Adds a song position bar.
+   * @default `false`
+   */
+  public static var songPositionBar(get, set):Bool;
+
+  static function get_songPositionBar():Bool
+  {
+    return Save?.instance?.options?.songPositionBar ?? false;
+  }
+
+  static function set_songPositionBar(value:Bool):Bool
+  {
+    var save:Save = Save.instance;
+    save.options.songPositionBar = value;
+    save.flush();
+    return value;
+  }
+
+  /**
    * If enabled, the game will automatically pause when tabbing out.
    * @default `true`
    */
@@ -239,6 +258,25 @@ class Preferences
 
     var save:Save = Save.instance;
     save.options.autoPause = value;
+    save.flush();
+    return value;
+  }
+
+  /**
+   * Changes default health bar colors to characters dominant color from health icon.
+   * @default `false`
+   */
+  public static var coloredHealthBar(get, set):Bool;
+
+  static function get_coloredHealthBar():Bool
+  {
+    return Save?.instance?.options?.coloredHealthBar ?? false;
+  }
+
+  static function set_coloredHealthBar(value:Bool):Bool
+  {
+    var save:Save = Save.instance;
+    save.options.coloredHealthBar = value;
     save.flush();
     return value;
   }

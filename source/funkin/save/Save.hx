@@ -96,9 +96,11 @@ class Save
           ghostTapping: true,
           antialiasing: true,
           flashingLights: true,
+          songPositionBar: false,
           zoomCamera: true,
           judgementsText: true,
           comboPopUp: true,
+          coloredHealthBar: false,
           debugDisplay: false,
           autoPause: true,
           inputOffset: 0,
@@ -1109,6 +1111,18 @@ typedef SaveDataOptions =
    * @default `false`
    */
   var debugDisplay:Bool;
+
+  /**
+   * Adds a song position bar.
+   * @default `false`
+   */
+  var songPositionBar:Bool;
+
+  /**
+   * Changes default health bar colors to characters dominant color from health icon.
+   * @default `false`
+   */
+  var coloredHealthBar:Bool;
 
   /**
    * If enabled, the game will automatically pause when tabbing out.
