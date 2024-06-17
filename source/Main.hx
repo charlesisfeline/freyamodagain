@@ -14,9 +14,6 @@ import openfl.Lib;
 import openfl.media.Video;
 import openfl.net.NetStream;
 import funkin.ui.FuckState;
-#if ALLOW_MULTITHREADING
-import sys.thread.Thread;
-#end
 
 // Adds support for FeralGamemode on Linux
 #if linux
@@ -52,9 +49,10 @@ class Main extends Sprite
 
   public static var watermark:Sprite;
 
-  public static var time:Int = 0;
-
   // You can pretty much ignore everything from here on - your code should go in your states.
+  @:noCompletion public static var verboseLogging:Bool = false;
+
+  public static var time:Int = 0;
 
   public static function main():Void
   {
@@ -69,6 +67,13 @@ class Main extends Sprite
   public function new()
   {
     super();
+
+    if (Sys.args().contains('--verbose'))
+    {
+      #if windows Sys.println(''); #end // because my console was being goofy
+      verboseLogging = true;
+      Log.info('Verbose Logging Enabled');
+    }
 
     instance = this;
 

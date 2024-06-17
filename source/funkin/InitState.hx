@@ -59,10 +59,6 @@ class InitState extends FlxState
     ""
     #end;
 
-  #if ALLOW_MULTITHREADING
-  public static var gameThreads:Array<Thread> = [];
-  #end
-
   /**
    * Perform a bunch of game setup, then immediately transition to the title screen.
    */
@@ -99,18 +95,6 @@ class InitState extends FlxState
     startGame();
   }
 
-  private static var __threadCycle:Int = 0;
-
-  public static function execAsync(func:Void->Void)
-  {
-    #if ALLOW_MULTITHREADING
-    var thread = gameThreads[(__threadCycle++) % gameThreads.length];
-    thread.events.run(func);
-    #else
-    func();
-    #end
-  }
-
   /**
    * Setup a bunch of important Flixel stuff.
    */
@@ -141,13 +125,6 @@ class InitState extends FlxState
 
     @:privateAccess
     FlxG.game.getTimer = () -> openfl.Lib.getTimer();
-
-    #if ALLOW_MULTITHREADING
-    for (i in 0...4)
-      gameThreads.push(Thread.createWithEventLoop(function() {
-        Thread.current().events.promise();
-      }));
-    #end
 
     setupFlixelDebug();
 

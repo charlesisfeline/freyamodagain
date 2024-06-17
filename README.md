@@ -2,6 +2,8 @@
 
 what
 
+Kitsune Engine, used for this mod, tries to improve the base engine with uhhhh Quality of Life features and soon, optimization & whatever.
+
 # Friday Night Funkin'
 
 Friday Night Funkin' is a rhythm game. Built using HaxeFlixel for Ludum Dare 47.
