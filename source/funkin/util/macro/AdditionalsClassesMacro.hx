@@ -1,7 +1,5 @@
 package funkin.util.macro;
 
-package funkin.util.macro;
-
 #if macro
 import haxe.macro.Context;
 import haxe.macro.Compiler;
